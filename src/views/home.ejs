@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/anima1.css">
+    <link rel="stylesheet" href="/css/anima2.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Document</title>
+    
+</head>
+<!-- <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script> -->
+<body>
+  
+  <nav class="navbar navbar-expand-lg">
+    <a class="navbar-brand" style="color:whitesmoke;" href="/" >Unilever</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin-top: 20px; color: wheat;">
+              Actinos
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <div class="row">
+              <div class="col-4">
+                <div class="nav flex-column nav-tab pl-3 pr-3 link-con" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                  <a class="nav-item nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-humanRes" role="tab" aria-controls="v-pills-humanRes" aria-selected="true">resource Management</a>
+                  <div class="dropdown-divider "></div>
+                  <a class="nav-item nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-invMan" role="tab" aria-controls="v-pills-invMan" aria-selected="false">Inventory Management</a>
+                  <div class="dropdown-divider "></div>
+                </div>
+                <a class="dropdown-item" href="#">About</a>
+                <a class="dropdown-item" href="/logout">Logout</a>
+            </div>
+          </div>
+        </li> 
+        <li>
+            <div class="row" >
+              <div class="row imgcon" style="margin-left: 1000px;">
+                <img src="" alt="img not found" width="75px" height="75px" hidden style="border-radius:50px;" id="proPic">
+              </div>
+              <div id="proann" hidden>
+                <div class="dot-spinner">
+                  <div class="dot-spinner__dot"></div>
+                  <div class="dot-spinner__dot"></div>
+                  <div class="dot-spinner__dot"></div>
+                  <div class="dot-spinner__dot"></div>
+                  <div class="dot-spinner__dot"></div>
+                  <div class="dot-spinner__dot"></div>
+                  <div class="dot-spinner__dot"></div>
+                  <div class="dot-spinner__dot"></div>
+                </div>
+
+              </div>
+
+            </div>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <div class="container ">
+    <div class="col ">
+      <div class="tab-content" id="v-pills-tabContent">
+        <!-- humanres -->
+        <div class="tab-pane fade show active" id="v-pills-humanRes" role="tabpanel" aria-labelledby="v-pills-humanRes-tab">
+          <nav>
+            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+              <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-empReg" role="tab" aria-controls="nav-home" aria-selected="true">Employee Register Form</a>
+              <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false" onclick="propile()">Employees Profile info</a>
+            </div>
+          </nav>
+          <div class="tab-content" id="nav-tabContent">
+
+            <!--  empReg -->
+            <div class="tab-pane fade show active" id="nav-empReg" role="tabpanel" aria-labelledby="nav-home-tab">
+              <div class="row">
+                <div class="col-2 border-right mt-4 ml-3 pt-3 pb-3 mr-2">
+                  <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                    <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-stemp" role="tab" aria-controls="v-pills-home" aria-selected="true">Staff Employee </a>
+                    <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-driver" role="tab" aria-controls="v-pills-profile" aria-selected="false">Driver</a>
+                    <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-cars" role="tab" aria-controls="v-pills-profile" aria-selected="false">Cars</a>
+                    <a class="nav-link" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-Estemp" role="tab" aria-controls="v-pills-home" aria-selected="true">Edit Staff info </a>
+                    <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-Ecars" role="tab" aria-controls="v-pills-profile" aria-selected="false">Edit car info</a>
+
+                  </div>
+                </div>
+                <div class="col mt-4 border-left border-right mr-3">
+                  <div class="tab-content" id="v-pills-tabContent">
+                    
+                    <!-- stemp -->
+                    <div class="tab-pane fade show active " id="v-pills-stemp" role="tabpanel" aria-labelledby="v-pills-home-tab">
+                      <div class="border col" style="text-align: center;"><h3>Staff Register form</h3></div>
+                      <form class="mt-4">
+                        <div class="row">
+                          <div class="form-group col">
+                            <div><label for="Fname">FName</label></div>
+                            <input type="text" class="form-control" id="Fname" placeholder="F-name">
+                            <div><label for="sex">Sex</label></div>
+                            <select class="form-control col-7" id="sex">
+                              <option>Male</option>
+                              <option>Female</option>
+                            </select>
+                            <div><label for="DOB">Date of birth</label></div>
+                            <input type="date" class="form-control col-7" id="DOB">
+                            <div class="alert alert-danger" role="alert" id="dateErr" hidden>
+                    
+                            </div>
+                          </div>
+                          <div class="form-group col l">
+                            <div><label for="Lname">LName</label></div>
+                            <input type="text" class="form-control " id="Lname" placeholder="L-name">
+                          </div>
+                          <div class="form-group pt-4 col">
+                            <input type="file" id="filePhate" class="mt-2">
+                            <div class="alert alert-warning" role="alert" id="errmIm" hidden>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row ">
+                          <div class="form-group col-4 pl-0">
+                            <div class="form-group col">
+                              <div><label for="Homeno">Home Number</label></div>
+                              <input type="text" class="form-control col-9" id="Homeno" value="new">
+                              <div class="alert alert-danger" role="alert" id="homenErr" hidden>
+                    
+                              </div>
+                            </div><div class="form-group col">
+                              <div><label for="Homeno">Kebela</label></div>
+                              <input type="text" class="form-control col-9" id="kebela" placeholder="Kebela">
+                            </div>
+                          </div>
+                          <div class="col SC">
+                            <div class="row row-2">
+                              <div class="form-group col ">
+                                <div><label for="city">City</label></div>
+                                <input type="text" class="form-control " id="city" value="Addis Ababa" readonly>
+                              </div>
+                              <div class="form-group col ">
+                                <div><label for="subCity">SubCity</label></div>
+                                <select class="form-control col-9" id="subCity">
+                                  <option>Bole</option>
+                                  <option>Akaki Kaliti</option>
+                                  <option>Addis Ketema</option>
+                                  <option>Arada</option>
+                                  <option>Gulele</option>
+                                  <option>kirkos</option>
+                                  <option>Kolfe-Keranio</option>
+                                  <option>Lideta</option>
+                                  <option>Nifas Silk-Lafto</option>
+                                  <option>Yeka</option>
+                                </select>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="form-group col-4">
+                            <div><label for="phone1">Phone Number 1</label></div>
+                            <input type="text" class="form-control" id="phone" placeholder="Pnone Number">
+                            <div class="alert alert-danger" role="alert" id="phErr" hidden>
+                    
+                            </div>
+                          </div>
+                          <div class="form-group col-4">
+                            <div><label for="phone2">Phone Number 2</label></div>
+                            <input type="text" class="form-control " id="phone2" placeholder="Pnone Number">
+                          </div>
+                        </div>
+                        <div class="row ">
+                          <div class="form-group col-4">
+                            <div><label for="email">Email</label></div>
+                            <input type="email" class="form-control" id="email" placeholder="Exampil@gmail.com">
+                            <div class="alert" role="" id="Emloder" hidden>
+                              <div class="spinner center mt-3">
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="form-group col-4">
+                            <div><label for="password">Password</label></div>
+                            <input type="password" class="form-control " id="password" placeholder="Password">
+                            <div class="alert alert-warning" role="alert" id="errmP" hidden>
+                            </div>
+                          </div>
+                          <div class="form-group col-4">
+                            <div><label for="passwordC">Confirm Password</label></div>
+                            <input type="password" class="form-control " id="passwordC" placeholder="Password">
+                          </div>
+                        </div>
+                       <div class="row">
+                        <div class="form-group col-3 ">
+                          <div><label for="edu">Education</label></div>
+                          <select class="form-control col" id="edu">
+                            <option>Degree</option>
+                            <option>Diploma</option>
+                            <option>Highschool Diploma</option>
+                            <option>Not specified</option>
+                          </select>
+                        </div>
+                        <div class="form-group col-3 ">
+                          <div><label for="edu">Status</label></div>
+                          <select class="form-control col" id="workeST">
+                            <option>Receptionist</option>
+                            <option>Inventory Manager</option>
+                          </select>
+                        </div>
+                       </div>
+                        <div class="row">
+                          <div class="form-group col-3">
+                            <button type="button" class="btn btn-primary" id="reg">Register</button>
+                            <button type="button" class="btn btn-danger ml-3" id="can">Cancel</button>
+                          </div>
+                          <div class="row">
+                            <div class="alert" role="" id="reglod" hidden>
+                              <div class="spinner center mt">
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                              </div>
+                            </div>
+                            <div class="alert alert-success" role="alert" id="regsuss" hidden>
+                            </div>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                    <!-- stemp  end -->
+                    
+                    <!-- driver -->
+                    <div class="tab-pane fade" id="v-pills-driver" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+                      <div class="border col" style="text-align: center;"><h3>Driver Register form</h3></div>
+                      <form class="mt-4">
+                        <div class="row">
+                          <div class="form-group col">
+                            <div><label for="DFname">FName</label></div>
+                            <input type="text" class="form-control" id="DFname" placeholder="F-name">
+                            <div><label for="Dsex">Sex</label></div>
+                            <select class="form-control col-7" id="Dsex">
+                              <option>Male</option>
+                              <option>Female</option>
+                            </select>
+                            <div><label for="DDOB">Date of birth</label></div>
+                            <input type="date" class="form-control col-7" id="DDOB">
+                          </div>
+                          <div class="form-group col l">
+                            <div><label for="DLname">LName</label></div>
+                            <input type="text" class="form-control " id="DLname" placeholder="L-name">
+                          </div>
+                          <div class="form-group pt-4">
+                            <input type="file" id="DfilePhate" class="mt-2">
+                          </div>
+                        </div>
+                        <div class="row ">
+                          <div class="form-group col-4 pl-0">
+                            <div class="form-group col">
+                              <div><label for="DHomeno">Home Number</label></div>
+                              <input type="text" class="form-control col-9" id="DHomeno" value="new">
+                            </div><div class="form-group col">
+                              <div><label for="DHomeno">Kebela</label></div>
+                              <input type="text" class="form-control col-9" id="Dkebela" placeholder="Kebela">
+                            </div>
+                          </div>
+                          <div class="col SC">
+                            <div class="row row-2">
+                              <div class="form-group col ">
+                                <div><label for="Dcity">City</label></div>
+                                <input type="text" class="form-control " id="Dcity" value="Addis Ababa" readonly>
+                              </div>
+                              <div class="form-group col ">
+                                <div><label for="DsubCity">SubCity</label></div>
+                                <select class="form-control col-9" id="DsubCity">
+                                  <option>Bole</option>
+                                  <option>Akaki Kaliti</option>
+                                  <option>Addis Ketema</option>
+                                  <option>Arada</option>
+                                  <option>Gulele</option>
+                                  <option>kirkos</option>
+                                  <option>Kolfe-Keranio</option>
+                                  <option>Lideta</option>
+                                  <option>Nifas Silk-Lafto</option>
+                                  <option>Yeka</option>
+                                </select>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="form-group col-4">
+                            <div><label for="Dphone1">Phone Number 1</label></div>
+                            <input type="text" class="form-control" id="Dphone" placeholder="Pnone Number">
+                          </div>
+                          <div class="form-group col-4">
+                            <div><label for="Dphone2">Phone Number 2</label></div>
+                            <input type="text" class="form-control " id="Dphone2" placeholder="Pnone Number">
+                          </div>
+                        </div>
+                        <div class="row ">
+                          <div class="form-group col-4">
+                            <div><label for="Demail">Email</label></div>
+                            <input type="email" class="form-control" id="Demail" placeholder="Exampil@gmail.com">
+                            <div class="alert" role="" id="DEmloder" hidden>
+                              <div class="spinner center mt-3">
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <small class="text-muted">Assign a car to this driver</small>
+                        <hr>
+                        <div class="row">
+                          <div class="form-group col-4">
+                            <div><label for="car">Car</label></div>
+                            <select class="form-control col-7" id="car">
+                              <option>sample</option>
+                              <option>sample</option>
+                              <option>sample</option>
+                              <option>sample</option>
+                            </select>
+                          </div>
+                          <div class="form-group col-4">
+                            <div><label for="model">Model</label></div>
+                            <select class="form-control col-7" id="Dmodel" >
+                              <option>sample</option>
+                              <option>sample</option>
+                              <option>sample</option>
+                              <option>sample</option>
+                            </select>
+                            <div class="alert  pr-3" role="" id="Mloder" hidden>
+                              <div class="spinner center ml-5 ">
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="form-group col-3">
+                            <button type="button" class="btn btn-primary" id="Dreg">Register</button>
+                            <button type="button" class="btn btn-danger ml-3" id="Dcan">Cancel</button>
+                          </div>
+                          <div class="row">
+                            <div class="alert" role="" id="Dreglod" hidden>
+                              <div class="spinner center mt">
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                              </div>
+                            </div>
+                            <div class="alert alert-success" role="alert" id="Dregsuss" hidden>
+                            </div>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                    <!-- driver end -->
+
+                    <!-- cars -->
+                    <div class="tab-pane fade" id="v-pills-cars" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+                      <div class="border col" style="text-align: center;"><h3>Driver Register form</h3></div>
+                      <form class="mt-4">
+                        <div class="row">
+                          <div class="form-group col-4">
+                            <div><label for="DFname">Name</label></div>
+                            <input type="text" class="form-control" id="name" placeholder="Car Name">
+                          </div>
+                          <div class="form-group col-4">
+                            <div><label for="DFname">Model</label></div>
+                            <input type="text" class="form-control" id="model" placeholder="Car Model">
+                            <div class="alert alert-warning" role="alert" id="EMmodel" hidden>
+                              Invalid data type Enater a Number
+                            </div>
+                           
+                            <div class="alert alert-warning" role="alert" id="EMIVmodel" hidden>
+                              The Model you Enterd is invalid
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="form-group col-4">
+                            <div><label for="DFname">Maximum payload</label></div>
+                            <div class="input-group">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1">Ton</span>
+                              </div>
+                              <input type="text" class="form-control" id="max" placeholder="Maximum" aria-label="Username" aria-describedby="basic-addon1">
+                            </div>
+                            <div class="alert alert-warning" role="alert" id="EMmax" hidden>
+                              Invalid data type Enater a Number
+                            </div>
+                            <div class="alert  pr-3" role="" id="MAloder" hidden>
+                              <div class="spinner center">
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="form-group col-4">
+                            <div><label for="DFname">Minimum payload</label></div>
+                            <div class="input-group">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1">Ton</span>
+                              </div>
+                              <input type="text" class="form-control" id="min" placeholder="Minimum" aria-label="Username" aria-describedby="basic-addon1">
+                            </div>
+                            <div class="alert alert-warning" role="alert" id="EMmin" hidden>
+                              Invalid data type Enater a Number
+                            </div>
+                            <div class="alert alert-warning" role="alert" id="gErr" hidden>
+                            </div>
+                          </div>
+                        </div>
+                        <small class="text-muted">Number of cars that are beeing registered</small>
+                        <hr>
+                        <div class="row">
+                          <div class="form-group col-4">
+                            <div><label for="DFname">Quantity</label></div>
+                            <input type="text" class="form-control" id="quan" placeholder="Quantity">
+                            <div class="alert alert-warning" role="alert" id="EMquan" hidden>
+                              Invalid data type Enater a Number
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="form-group col-3">
+                            <button type="button" class="btn btn-primary" id="Creg">Register</button>
+                            <button type="button" class="btn btn-danger ml-3" id="Ccan">Cancel</button>
+                          </div>
+                          <div class="row">
+                            <div class="alert" role="" id="Creglod" hidden>
+                              <div class="spinner center mt">
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                              </div>
+                            </div>
+                            <div class="alert alert-success" role="alert" id="Cregsuss" hidden>
+                            </div>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                    <!-- cars end -->
+
+                    <!--Edit stemp -->
+                    <div class="tab-pane fade" id="v-pills-Estemp" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+                      <div class="tab-pane fade show active " id="v-pills-stemp" role="tabpanel" aria-labelledby="v-pills-home-tab">
+                        <div class="border col" style="text-align: center;" id="header"><h3>Staff Edit form</h3></div>
+                        <div class="row">
+                          <div class="col-6">
+                            <div class="input-group mb-3 mt-4">
+                              <input type="text" class="form-control" placeholder="ID" aria-label="Recipient's username" aria-describedby="button-addon2" id="serchinput">
+                              <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="button" id="button-addon2"><i class="fa fa-search" aria-hidden="true"></i> Search</button>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col">
+                            <div>Select user status</div>
+                            <select class="form-control col-6" id="status">
+                              <option>Staff member</option>
+                              <option>Driver</option>
+                            </select>
+                          </div>
+                        </div>
+                        <hr>
+                        <form class="mt-4">
+                          <div class="row">
+                            <div class="form-group col-4">
+                              <div><label for="EFname">FName</label></div>
+                              <input type="text" class="form-control" id="EFname" placeholder="F-name">
+                              <div><label for="Esex">Sex</label></div>
+                              <select class="form-control col-7" id="Esex">
+                                <option>Male</option>
+                                <option>Female</option>
+                              </select>
+                              <div><label for="EDOB">Date of birth</label></div>
+                              <input type="date" class="form-control col-7" id="EDOB">
+                            </div>
+                            <div class="form-group col-4">
+                              <div><label for="ELname">LName</label></div>
+                              <input type="text" class="form-control " id="ELname" placeholder="L-name">
+                            </div>
+                            <div class="form-group pt-4 col-4" style="text-align: center;">
+                              <img src="" alt="img not found" width="150px" height="150px"   id="userpic">
+
+                            </div>
+                          </div>
+                          <div class="row ">
+                            <div class="form-group col-4 pl-0">
+                              <div class="form-group col">
+                                <div><label for="EHomeno">Home Number</label></div>
+                                <input type="text" class="form-control col-9" id="EHomeno" value="new">
+                              </div><div class="form-group col">
+                                <div><label for="EHomeno">Kebela</label></div>
+                                <input type="text" class="form-control col-9" id="Ekebela" placeholder="Kebela">
+                              </div>
+                            </div>
+                            <div class="col SC">
+                              <div class="row row-2">
+                                <div class="form-group col ">
+                                  <div><label for="Ecity">City</label></div>
+                                  <input type="text" class="form-control " id="Ecity" value="Addis Ababa" readonly>
+                                </div>
+                                <div class="form-group col ">
+                                  <div><label for="EsubCity">SubCity</label></div>
+                                  <select class="form-control col-9" id="EsubCity">
+                                    <option>Bole</option>
+                                    <option>Akaki Kaliti</option>
+                                    <option>Addis Ketema</option>
+                                    <option>Arada</option>
+                                    <option>Gulele</option>
+                                    <option>kirkos</option>
+                                    <option>Kolfe-Keranio</option>
+                                    <option>Lideta</option>
+                                    <option>Nifas Silk-Lafto</option>
+                                    <option>Yeka</option>
+                                  </select>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="form-group col-4">
+                              <div><label for="Ephone1">Phone Number 1</label></div>
+                              <input type="text" class="form-control" id="Ephone" placeholder="Pnone Number">
+                            </div>
+                            <div class="form-group col-4">
+                              <div><label for="Ephone2">Phone Number 2</label></div>
+                              <input type="text" class="form-control " id="Ephone2" placeholder="Pnone Number">
+                            </div>
+                          </div>
+                          <div class="row" id="carass" hidden>
+                            <div class="form-group col-4">
+                              <div><label for="car">Car</label></div>
+                              <select class="form-control col-7" id="Ecar">
+                                <option>sample</option>
+                                <option>sample</option>
+                                <option>sample</option>
+                                <option>sample</option>
+                              </select>
+                            </div>
+                            <div class="form-group col-4">
+                              <div><label for="model">Model</label></div>
+                              <select class="form-control col-7" id="Emodel" >
+                                <option>sample</option>
+                                <option>sample</option>
+                                <option>sample</option>
+                                <option>sample</option>
+                              </select>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="form-group col-3">
+                              <button type="button" class="btn btn-primary" id="Ereg">Edit</button>
+                              <button type="button" class="btn btn-danger ml-3" id="Ecan">Cancel</button>
+                            </div>
+                            <div class="row">
+                              <div class="alert" role="" id="Ereglod" hidden>
+                                <div class="spinner center mt">
+                                  <div class="spinner-blade"></div>
+                                  <div class="spinner-blade"></div>
+                                  <div class="spinner-blade"></div>
+                                  <div class="spinner-blade"></div>
+                                  <div class="spinner-blade"></div>
+                                  <div class="spinner-blade"></div>
+                                  <div class="spinner-blade"></div>
+                                  <div class="spinner-blade"></div>
+                                  <div class="spinner-blade"></div>
+                                  <div class="spinner-blade"></div>
+                                  <div class="spinner-blade"></div>
+                                  <div class="spinner-blade"></div>
+                                </div>
+                              </div>
+                              <div class="alert alert-success" role="alert" id="Eregsuss" hidden>
+                              </div>
+                            </div>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                    <!-- Edit stemp end -->
+                    
+                    <!-- Edit cars -->
+                    <div class="tab-pane fade" id="v-pills-Ecars" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+                      <div class="row">
+                        <div class="col-6">
+                          <div class="input-group mb-3 mt-4">
+                            <input type="text" class="form-control" placeholder="ID" aria-label="Recipient's username" aria-describedby="button-addon2" id="CEserchinput">
+                            <div class="input-group-append">
+                              <button class="btn btn-outline-secondary" type="button" id="CEbutton-addon2"><i class="fa fa-search" aria-hidden="true"></i> Search</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <hr>
+                      <form class="mt-4">
+                        <div class="row">
+                          <div class="form-group col-4">
+                            <div><label for="DFname">Name</label></div>
+                            <input type="text" class="form-control" id="CEname" placeholder="Car Name">
+                          </div>
+                          <div class="form-group col-4">
+                            <div><label for="DFname">Model</label></div>
+                            <input type="text" class="form-control" id="CEmodel" placeholder="Car Model">
+                            <div class="alert alert-warning" role="alert" id="CEEMmodel" hidden>
+                              Invalid data type Enater a Number
+                            </div>
+                           
+                            <div class="alert alert-warning" role="alert" id="CEEMIVmodel" hidden>
+                              The Model you Enterd is invalid
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="form-group col-4">
+                            <div><label for="DFname">Maximum payload</label></div>
+                            <div class="input-group">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1">Ton</span>
+                              </div>
+                              <input type="text" class="form-control" id="CEmax" placeholder="Maximum" aria-label="Username" aria-describedby="basic-addon1">
+                            </div>
+                            <div class="alert alert-warning" role="alert" id="CEEMmax" hidden>
+                              Invalid data type Enater a Number
+                            </div>
+                          </div>
+                          <div class="form-group col-4">
+                            <div><label for="DFname">Minimum payload</label></div>
+                            <div class="input-group">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1">Ton</span>
+                              </div>
+                              <input type="text" class="form-control" id="CEmin" placeholder="Minimum" aria-label="Username" aria-describedby="basic-addon1">
+                            </div>
+                            <div class="alert alert-warning" role="alert" id="CEEMmin" hidden>
+                              Invalid data type Enater a Number
+                            </div>
+                            <div class="alert alert-warning" role="alert" id="CEgErr" hidden>
+                            </div>
+                          </div>
+                        </div>
+                        <small class="text-muted">Number of cars that are beeing registered</small>
+                        <hr>
+                        <div class="row">
+                          <div class="form-group col-4">
+                            <div><label for="DFname">Quantity</label></div>
+                            <input type="text" class="form-control" id="CEquan" placeholder="Quantity">
+                            <div class="alert alert-warning" role="alert" id="CEEMquan" hidden>
+                              Invalid data type Enater a Number
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="form-group col-3">
+                            <button type="button" class="btn btn-primary" id="CECreg">Register</button>
+                            <button type="button" class="btn btn-danger ml-3" id="CECcan">Cancel</button>
+                          </div>
+                          <div class="row">
+                            <div class="alert" role="" id="ECreglod" hidden>
+                              <div class="spinner center mt">
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                              </div>
+                            </div>
+                            <div class="alert alert-success" role="alert" id="ECregsuss" hidden>
+                            </div>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                    <!-- Edit cars end -->
+                  
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- empReg  end -->
+            <!-- empPro -->
+            <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+              <div class="tab-pane fade show active" id="nav-empReg" role="tabpanel" aria-labelledby="nav-home-tab">
+               <div class="col mt-3 conte">
+                <div class="row search-con">
+                  <div class="col-6">
+                    <div class="input-group mb-3 mt-4">
+                      <input type="text" class="form-control" placeholder="ID" aria-label="Recipient's username" aria-describedby="button-addon2" id="serchinputid">
+                      <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="button" id="PObutton-addon2"><i class="fa fa-search" aria-hidden="true"></i>Search</button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div>Select user status</div>
+                    <select class="form-control col" id="Wstatus">
+                      <option>All</option>
+                      <option>Receptionist</option>
+                      <option>Inventory Manager</option>
+                      <option>Driver</option>
+                    </select>
+                  </div>
+                  <div class="col">
+                    <div>Sort By</div>
+                    <select class="form-control col" id="sort">
+                      <option>Name</option>
+                      <option>DOB</option>
+                      <option>Sex</option>
+                      <option>HomeNumber</option>
+                      <option>Kabala</option>
+                      <option>SubCity</option>
+                    </select>
+                  </div>
+                </div>
+                <hr>
+                <div class="loadingspinner"  id="SearchLoder">
+                  <div id="square1"></div>
+                  <div id="square2"></div>
+                  <div id="square3"></div>
+                  <div id="square4"></div>
+                  <div id="square5"></div>
+                </div>
+                <div class="col sebody" id="sebody">
+                </div>
+               </div>
+              </div>
+            </div>
+            <!-- empPro end -->
+          </div>
+        </div>
+        <!-- humanres end -->
+      
+        <div class="tab-pane fade" id="v-pills-invMan" role="tabpanel" aria-labelledby="v-pills-invMan-tab">invMan</div>
+      </div> 
+    </div>
+  </div>
+</body>
+
+<script src="https://kit.fontawesome.com/8825534f25.js" crossorigin="anonymous"></script>
+<script
+src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
+integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
+crossorigin="anonymous"
+referrerpolicy="no-referrer"
+></script>
+<link rel="stylesheet" href="/css/style.css">
+
+<script src="js/homepage.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+</html>
