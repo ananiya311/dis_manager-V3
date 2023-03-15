@@ -9,6 +9,8 @@ const users = require('../module/usersModule')
 const cars = require('../module/carModule')
 const driveres = require('../module/driverModule')
 const product  = require('../module/productsModule')
+const prodcutRef = require('../module/ProductRef')
+const ProductRef = require('../module/ProductRef')
 
 
 const baceimgUri = "C:/Users/ananiya muluken/Pictures"
@@ -146,18 +148,7 @@ route.post('/Register/:key', async(req, res)=>{
             }
 
         } 
-        
         return
-
-
-    // data.DOb = date.format((data.DOB), 'DD/MM/YYYY')
-    // console.log(date.format((new Date()), 'DD/MM/YYYY'));
-    
-    // const {imgPublicKey} = await users.create(req.body)
-    // const test = await img.uplodImage(baceimgUri+req.body.imgname)
-    // console.log(test);
-
-    
 })
 
 route.patch('/edit/:key', async(req, res)=>{
@@ -310,4 +301,44 @@ route.delete('/delete', async(req, res)=>{
         })
     }
 })
+
+// HQ
+route.get('/HQ', async(req, res)=>{
+    res.render('HQ.ejs')
+})
+route.get('/HQ/Allocate', async(req, res)=>{
+    console.log(req.query);
+    res.render("allocate.ejs")
+})
+
+route.post('/HQ/addRef', async(req, res)=>{
+    try {
+        await ProductRef.create(req.body)
+        res.status(200).send("OK")
+    } catch (error) {
+        res.status(404).send(error)
+    }
+})
+
+route.post('/HQ/getRef', async(req, res)=>{
+    try{
+        console.log(req.body);
+        const data = await prodcutRef.find(req.body)
+        res.status(200).json({data})
+    }catch(err){
+        res.status(404).send("not found")
+    }
+})
+
+route.patch('/HQ/editRef', async(req, res)=>{
+    try{
+        const {newdata,oldname:{proname}} = req.body
+        const {_id} = await prodcutRef.findOne({ProductName:proname})
+        await prodcutRef.updateOne({_id:_id}, newdata)
+        res.status(200).send('edited')
+    }catch(err){
+        res.status(404).sedn('not edited')
+    }
+})
+
 module.exports = route

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/hq.css">
+    <title>HQ pro</title>
+</head>
+<body>
+    <div class="card-header">
+        <a class="navbar-brand" style="color:rgb(0, 0, 0);" href="/">Unilever HQ</a>
+    </div>
+
+    <div class="container border">
+        <div class="row">
+            <div class="col-2 mt-3">
+              <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#addref" role="tab" aria-controls="v-pills-home" aria-selected="true">Product reference</a>
+                <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#addtoinv" role="tab" aria-controls="v-pills-profile" aria-selected="false">Add to invetory</a>
+                <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#damge" role="tab" aria-controls="v-pills-messages" aria-selected="false">Messages</a>
+                <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="/HQ/Allocate?status=normal" role="tab" aria-controls="v-pills-messages" aria-selected="false"><a href="/HQ/Allocate?status=normal" class="ml-3">Allocate pro</a></a>
+              </div>
+            </div>
+            <div class="col-9">
+              <div class="tab-content" id="v-pills-tabContent">
+                <div class="tab-pane fade show active" id="addref" role="tabpanel" aria-labelledby="v-pills-home-tab">
+                  <div class="container border mt-4">
+                    <div style="text-align: center;"><h3 id="header">Add to produc reference</h3></div>
+                    <hr>
+                    <div class="row mt-3 pl-5 mb-2">
+                      <div class="custom-control custom-radio">
+                        <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input" checked>
+                        <label class="custom-control-label" for="customRadio1">Add</label>
+                      </div>
+                      <div class="custom-control custom-radio ml-3">
+                        <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input">
+                        <label class="custom-control-label" for="customRadio2">Edit</label>
+                      </div>
+                    </div>
+                    <div class="col  mb-4" id="serchcon" hidden>
+                      <div class="col-6">
+                        <div class="input-group mt-4 ">
+                          <input type="text" class="form-control" placeholder="Search by Produc Name" aria-label="Recipient's username" aria-describedby="button-addon2" id="search-input">
+                          <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="button" id="button-addon2"><i class="fa fa-search" aria-hidden="true"></i> Search</button>
+                          </div>
+                        </div>
+                        <ul id="autocomplete-list" hidden></ul>
+                      </div>
+                      <small class="text-muted ml-3">Make sure you dont change the search input valule if you want to commit an edit</small>
+                    </div>
+        
+                    <form>
+                      <div class="form-group col">
+                        <label for="inputName" class="col-sm-2 col-form-label">Produc Name</label>
+                        <div class="col-5">
+                          <input type="text" class="form-control" id="proName" placeholder="Product Name">
+                          <div class="alert" role="" id="Slod" hidden>
+                            <div class="spinner center mt-3">
+                              <div class="spinner-blade"></div>
+                              <div class="spinner-blade"></div>
+                              <div class="spinner-blade"></div>
+                              <div class="spinner-blade"></div>
+                              <div class="spinner-blade"></div>
+                              <div class="spinner-blade"></div>
+                              <div class="spinner-blade"></div>
+                              <div class="spinner-blade"></div>
+                              <div class="spinner-blade"></div>
+                              <div class="spinner-blade"></div>
+                              <div class="spinner-blade"></div>
+                              <div class="spinner-blade"></div>
+                            </div>
+                          </div>
+                        </div>
+                        
+                      </div>
+                      <div class="form-group row pl-3">
+                        <div class="form-group col-4">
+                          <label for="" class="col-sm-2 col-form-label">Pcs/Case</label>
+                          <div class="col">
+                            <input type="text" class="form-control" id="pcsCase" placeholder="Pices percase">
+                          </div>
+                        </div>
+                        <div class="form-group col-4">
+                          <label for="" class="col col-form-label">Price Perpice</label>
+                          <div class="col">
+                            <input type="text" id="price" class="form-control" placeholder="Price Perpice">
+                          </div>
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="form-group col-4">
+                        <label for="" class="col col-form-label">Price Percase</label>
+                        <div class="col">
+                          <input type="text" id="pricePercase" class="form-control" placeholder="Price Percase" disabled>
+                        </div>
+                      </div>
+                      <div class="form-group row pl-5">
+                        <button type="button" class="btn btn-success" id="Add">Add</button>
+                        <button type="button" class="btn btn-danger ml-3" id="Cancel">Cancel</button>
+                        <div class="alert" role="" id="AEload" hidden>
+                          <div class="spinner center mt-3">
+                            <div class="spinner-blade"></div>
+                            <div class="spinner-blade"></div>
+                            <div class="spinner-blade"></div>
+                            <div class="spinner-blade"></div>
+                            <div class="spinner-blade"></div>
+                            <div class="spinner-blade"></div>
+                            <div class="spinner-blade"></div>
+                            <div class="spinner-blade"></div>
+                            <div class="spinner-blade"></div>
+                            <div class="spinner-blade"></div>
+                            <div class="spinner-blade"></div>
+                            <div class="spinner-blade"></div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="alert alert-success" role="alert" id="regsuss" style="text-align: center;" hidden>
+                      test
+                      </div>
+                    </form>
+                  </div>
+                </div>
+                <div class="tab-pane fade" id="addtoinv" role="tabpanel" aria-labelledby="v-pills-profile-tab">addtoinv</div>
+                <div class="tab-pane fade" id="addtoinv" role="tabpanel" aria-labelledby="v-pills-messages-tab">edaloor</div>
+                
+              </div>
+            </div>
+          </div>
+    </div>
+
+</body>
+
+<script src="js/hq.js"></script>
+<script
+src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
+integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
+crossorigin="anonymous"
+referrerpolicy="no-referrer"
+></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+</html>

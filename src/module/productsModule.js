@@ -19,11 +19,6 @@ const products = mongoose.Schema({
         type:Date,
         required:[true, "the expertion date is required"]
     },
-    productType:{
-        type:String,
-        required:[true, "the production type is required"],
-        trime:true
-    },
     productCatagory:{
         type:String,
         required:[true, "teh priduct catagory is required"],

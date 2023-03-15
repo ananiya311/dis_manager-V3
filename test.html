@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<style>
+		#autocomplete-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  z-index: 1;
+  width: 100%;
+  background-color: #f1f1f1;
+  border: 1px solid #ddd;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+#autocomplete-list li {
+  padding: 10px;
+  cursor: pointer;
+}
+
+#autocomplete-list li:hover {
+  background-color: #ddd;
+}
+
+	</style>
+</head>
+<body>
+	<label for="search-input">Search:</label>
+	<input type="text" id="search-input" placeholder="Type to search...">
+	<ul id="autocomplete-list"></ul>
+
+</body>
+<script src="test.js"></script>
+</html>
