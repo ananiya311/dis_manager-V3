@@ -23,4 +23,4 @@ const cars = mongoose.Schema({
     }
 })
 
-module.exports = mongoose.model("cars", cars)
+module.exports = mongoose.model("HQcars", cars)

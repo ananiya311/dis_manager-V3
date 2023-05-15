@@ -46,7 +46,7 @@ const errmIm = document.getElementById('errmIm')
 const populateFilds = async ()=>{
      proPic.hidden = true
      proann.hidden = false
-     const {data}= await axios.post('get/pro')
+     const {data}= await axios.get('get/pro')
      proPic.src = `${data.ImgUrl}`
      proann.hidden = true
      proPic.hidden = false
@@ -261,6 +261,8 @@ const car = document.getElementById('car')
 const Dmodel = document.getElementById('Dmodel')
 const Mloder = document.getElementById('Mloder')
 
+const Dplate = document.getElementById('plate')
+
 
 const DRegister = document.getElementById('Dreg')
 const Dcancel = document.getElementById('Dcan')
@@ -270,28 +272,33 @@ const Dregsuss = document.getElementById('Dregsuss')
 const carNameP = async ()=>{
      
      const{data} = await axios.post('/get/car',{
-          instock:{"$gt":0}
+          available:true
      })
      if (data.length > 0) {
           var html = ''
           var temp = []
+          console.log(temp);
           for (let index = 0; index < data.length; index++) {
+               console.log(temp.indexOf(data[index].name) === -1);
                if(temp.indexOf(data[index].name) == -1){
                     temp.push(data[index].name)
                }
                
           }
+          console.log(temp);
           for (let index = 0; index < temp.length; index++) {
                html += `<option>${temp[index]}</option>`;
           }
           car.innerHTML = html
-          modelNameP()
+          await modelNameP()
      }else{
           car.innerHTML = '<option>no car found</option>'
      }
 
 } 
-carNameP()
+window.onload = async()=>{
+     await carNameP()
+}
 
 const modelNameP = async()=>{
 
@@ -299,24 +306,52 @@ const modelNameP = async()=>{
           Mloder.hidden = false
           const {data} = await axios.post('/get/car',{
                name: car.value,
-               instock: {'$gt':0}
+               available: true
           })
-     
+          var temp = []
+          for (let index = 0; index < data.length; index++) {
+               if(temp.indexOf(data[index].model) == -1){
+                    temp.push(data[index].model)
+               }
+               
+          }
           Mloder.hidden = true
           var html2 = ''
-          for (let index = 0; index < data.length; index++) {
-               html2 += `<option>${data[index].model}</option>`;
+          for (let index = 0; index < temp.length; index++) {
+               html2 += `<option>${temp[index]}</option>`;
+               console.log(data[index].model);
           }
           Dmodel.innerHTML = html2
+          await platemap()
      }else{
           Dmodel.innerHTML = "no models"
      }
      
      
 }
+const platemap = async()=>{
+     if(Dmodel.value){
+         await axios.post('/get/car',{
+             model: Dmodel.value,
+             name: car.value,
+             available:true
+         }).then((data)=>{
+             const list = data.data.map((data)=>{
+                 return `<option>${data.PlatNumber}</option>`
+             })
+             Dplate.innerHTML = list
+         })
+     }else{
+         console.log("teset");
+     }
+ }
 
-car.addEventListener('change', ()=>{
-     modelNameP()
+car.addEventListener('change', async ()=>{
+     await modelNameP()
+})
+
+Dmodel.addEventListener('change', async()=>{
+     await platemap()
 })
 DRegister.addEventListener('click', async()=>{
      const Dusers = [DFname.value, DLname.value, DfilePhate.value, DHomeNo.value, Dkebela.value, DphoneNumber1.value, DphoneNumber2.value, DDob.value]
@@ -341,8 +376,7 @@ DRegister.addEventListener('click', async()=>{
                     SubCity:DSubcity.value,
                     },
                     carpro:{
-                         name:car.value,
-                         model:parseInt(Dmodel.value)
+                         PlatNumber:Dplate.value
                     },
                     imgname:filename.split('fakepath')[1]
                }).then(()=>{
@@ -386,7 +420,7 @@ const Ccancel = document.getElementById('Ccan')
 const Creglod = document.getElementById('Creglod')
 const Cregsuss = document.getElementById('Cregsuss')
 
-const typeCastCheck = (arry, Imodel, Imax, Imin, Iquan)=>{
+const typeCastCheck = (arry, Imodel, Imax, Imin)=>{
      for (let index = 0; index < arry.length; index++) {
           const element = arry[index];
           if(element == undefined || element == ""){
@@ -425,84 +459,27 @@ const typeCastCheck = (arry, Imodel, Imax, Imin, Iquan)=>{
                          }, 2000);
                          return false
                     }else{
-     
-                         if(parseInt(Iquan.value) != Iquan.value){
-                              EMquan.hidden = false
-                              setTimeout(() => {
-                                   EMquan.hidden = true
-                              }, 2000)
-                              return false
-                         }else{
-                              return true
-                         }
+                         return true
                     }
                }
           }
      }
 }
 
-Cname.addEventListener('keyup', async()=>{
-     if (model.value) {
-         
-          const data = await axios.post('/get/car',{
-               name:Cname.value,
-               model:model.value
-          })
-          
-          if(data.data.length > 0){
-               max.disabled = true
-               min.disabled = true
-               max.value = data.data[0].MaxPaylodeLimt
-               min.value = data.data[0].minPaylodeLimt 
-          }else{
-               max.disabled = false
-               min.disabled = false
-               
-          }
-     }else{
-          
-     }
-})
-
-model.addEventListener('keyup', async()=>{
-     if (Cname.value) {
-          MAloder.hidden = false
-          const data = await axios.post('/get/car',{
-               name:Cname.value,
-               model:model.value
-          })
-          MAloder.hidden = true
-          if(data.data.length > 0){
-               max.disabled = true
-               min.disabled = true
-               max.value = data.data[0].MaxPaylodeLimt
-               min.value = data.data[0].minPaylodeLimt
-          }else{
-               max.disabled = false
-               min.disabled = false
-               max.value = null
-               min.value = null
-          }
-     }else{
-          
-          
-     }
-})
-
 Cregister.addEventListener('click', async()=>{
      const test = await axios.post('/get/car')
      const cardata = [Cname.value, model.value, max.value, min.value, quan.value]
-     const typecast = typeCastCheck(cardata, model, max, min, quan)
+     const typecast = typeCastCheck(cardata, model, max, min)
      if(typecast){
           const fpu = parseInt(max.value) * 0.5
           if(max.value != min.value && parseInt(min.value) < parseInt(max.value) && parseInt(min.value) >= fpu){
                Creglod.hidden = false
                await axios.post('/Register/car',{
-                    name:Cname.value,
+                    name:Cname.value.toUpperCase(),
                     model:parseInt(model.value),
                     MaxPaylodeLimt:parseInt(max.value),
                     minPaylodeLimt:parseInt(min.value),
-                    instock:parseInt(quan.value)
+                    PlatNumber:quan.value.toUpperCase()
                }).then(()=>{
                     Cregsuss.hidden = false
                     Cregister.innerHTML = "Edited"
@@ -570,6 +547,15 @@ const userpic = document.getElementById('userpic')
 
 const Ecar = document.getElementById('Ecar')
 const Emodel = document.getElementById('Emodel')
+const Eplate = document.getElementById('Eplate')
+
+const oldcarcon = document.getElementById('oldcarcon')
+const PDcar = document.getElementById('PDcar')
+const PDmodel = document.getElementById('PDmodel')
+const PDplat = document.getElementById('PDplat')
+
+const deva = document.getElementById('deva')
+const DEinfocom = document.getElementById('DEinfocom')
 
 const Eregister = document.getElementById('Ereg')
 const Ecancel = document.getElementById('Ecan')
@@ -579,7 +565,7 @@ const Eregsuss = document.getElementById('Eregsuss')
 const carNameP2 = async ()=>{
      
      const{data} = await axios.post('/get/car',{
-          instock:{"$gt":0}
+          available:true
      })
      if (data.length > 0) {
           var html = ''
@@ -595,23 +581,42 @@ const carNameP2 = async ()=>{
           }
           Ecar.innerHTML = html
           modelNameP2()
+          await platemap2()
      }else{
           Ecar.innerHTML = '<option>no car found</option>'
      }
 
-} 
+}
+const platemap2 = async()=>{
+     if(Dmodel.value){
+         await axios.post('/get/car',{
+             model: Emodel.value,
+             name: Ecar.value,
+             available:true
+         }).then((data)=>{
+             const list = data.data.map((data)=>{
+                 return `<option>${data.PlatNumber}</option>`
+             })
+             Eplate.innerHTML = list
+         })
+     }else{
+         console.log("teset");
+     }
+ }
 carNameP2()
 
 Ecar.addEventListener('change', ()=>{
      modelNameP2()
 })
-
+Emodel.addEventListener('change', async()=>{
+     await platemap2()
+})
 const modelNameP2 = async()=>{
 
      if(car.value != ''){
           const {data} = await axios.post('/get/car',{
                name: Ecar.value,
-               instock: {'$gt':0}
+               available:true
           })
           var html2 = ''
           for (let index = 0; index < data.length; index++) {
@@ -742,12 +747,12 @@ const populat = async()=>{
                userpic.src = `${data.data[0].ImgUrl}`
                userpic.hidden = false
                await axios.post('get/car', {
-                    _id: data.data[0].carAs
+                    PlatNumber: data.data[0].carAs
                }).then(async (data)=>{
                     console.log(data.data);
-                    Ecar.value = data.data[0].name
-                    await modelNameP2()
-                    Emodel.value = data.data[0].model
+                    PDcar.value = data.data[0].name
+                    PDmodel.value = data.data[0].model
+                    PDplat.value = data.data[0].PlatNumber
                })
           }else{
                alert("driver not found")
@@ -780,6 +785,9 @@ statusS.addEventListener('change', ()=>{
                EsubCity.value = "Bole"
                EphoneNumber1.value = null
                EphoneNumber2.value = null
+               deva.hidden = false
+               DEinfocom.checked = false
+               oldcarcon.hidden = false
      }else{
           header.innerHTML = "<h3>Staff edit form</h3>"
           carass.hidden = true
@@ -793,6 +801,9 @@ statusS.addEventListener('change', ()=>{
                EphoneNumber2.value = null
                Ecar.value = null
                Emodel.value = null
+               deva.hidden = true
+               DEinfocom.checked = false
+               oldcarcon.hidden = true
      }
 })
 
@@ -843,9 +854,10 @@ Eregister.addEventListener('click', async ()=>{
                               phoneNumber2: EphoneNumber2.value
                          },
                          AddInfo:{
-                              carname: Ecar.value,
-                              carmodel: Emodel.value,
-                              user_id: searchValue.value
+                              _id: searchValue.value,
+                              newPlatNumber:Eplate.value,
+                              oldPlateNumber:PDplat.value,
+                              commt:DEinfocom.value
                          }
 
                     }).then(()=>{
@@ -892,7 +904,7 @@ const CECcancel = document.getElementById('CECcan')
 const ECreglod = document.getElementById('ECreglod')
 const ECregsuss = document.getElementById('ECregsuss')
 
-const CEtypeCastCheck = (arry, Imodel, Imax, Imin, Iquan)=>{
+const CEtypeCastCheck = (arry, Imodel, Imax, Imin)=>{
      for (let index = 0; index < arry.length; index++) {
           const element = arry[index];
           if(element == undefined || element == ""){
@@ -931,16 +943,7 @@ const CEtypeCastCheck = (arry, Imodel, Imax, Imin, Iquan)=>{
                          }, 2000);
                          return false
                     }else{
-     
-                         if(parseInt(Iquan.value) != Iquan.value){
-                              CEEMquan.hidden = false
-                              setTimeout(() => {
-                                   CEEMquan.hidden = true
-                              }, 2000)
-                              return false
-                         }else{
-                              return true
-                         }
+                         return true
                     }
                }
           }
@@ -955,7 +958,7 @@ const populat2 = async()=>{
           CEmodel.value = data.data[0].model 
           CEmax.value = data.data[0].MaxPaylodeLimt
           CEmin.value = data.data[0].minPaylodeLimt 
-          CEquan.value = data.data[0].instock
+          CEquan.value = data.data[0].PlatNumber
      })
 }
 
@@ -965,7 +968,7 @@ CEbutton.addEventListener('click', async()=>{
 
 CECregister.addEventListener('click', async()=>{
      const CEcardata = [CEname.value, CEmodel.value, CEmax.value, CEmin.value, CEquan.value]
-     const typecast = CEtypeCastCheck(CEcardata, CEmodel, CEmax, CEmin, CEquan)
+     const typecast = CEtypeCastCheck(CEcardata, CEmodel, CEmax, CEmin)
      if(typecast){
           const fpu = parseInt(CEmax.value) * 0.5
           if(CEmax.value != CEmin.value && parseInt(CEmin.value) < parseInt(CEmax.value) && parseInt(CEmin.value) >= fpu){
@@ -976,7 +979,7 @@ CECregister.addEventListener('click', async()=>{
                          model:parseInt(CEmodel.value),
                          MaxPaylodeLimt:parseInt(CEmax.value),
                          minPaylodeLimt:parseInt(CEmin.value),
-                         instock:parseInt(CEquan.value)
+                         PlatNumber:CEquan.value
                     },AddInfo:{
                          _id:CEserchinput.value
                     }
@@ -1141,7 +1144,6 @@ proconDOM.addEventListener('click', async (e) => {
      const el = e.target
      if(el.classList.contains('DeleteData')){
           const conferm = confirm("test")
-
           if(conferm){
                await axios.delete(`/delete?id=${el.dataset.id}&status=${el.dataset.stat}`).then(()=>{
                     console.log("dleleted");

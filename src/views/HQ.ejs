@@ -13,18 +13,24 @@
         <a class="navbar-brand" style="color:rgb(0, 0, 0);" href="/">Unilever HQ</a>
     </div>
 
-    <div class="container border">
+    <div class="border">
+      <a href="Allocate?stat=AddProduct" id="allink" hidden></a>
         <div class="row">
             <div class="col-2 mt-3">
               <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                 <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#addref" role="tab" aria-controls="v-pills-home" aria-selected="true">Product reference</a>
                 <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#addtoinv" role="tab" aria-controls="v-pills-profile" aria-selected="false">Add to invetory</a>
-                <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#damge" role="tab" aria-controls="v-pills-messages" aria-selected="false">Messages</a>
-                <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="/HQ/Allocate?status=normal" role="tab" aria-controls="v-pills-messages" aria-selected="false"><a href="/HQ/Allocate?status=normal" class="ml-3">Allocate pro</a></a>
+                <a class="nav-link" id="proALL" data-toggle="pill" href="#damge" role="tab" aria-controls="v-pills-messages" aria-selected="false">Allocate pro</a>
+                <a class="nav-link" id="poliing" data-toggle="pill" href="#prolist" role="tab" aria-controls="v-pills-messages" aria-selected="false">Product listing</a>
+                <hr>
+                <a class="nav-link" id="es" data-toggle="pill" href="#Dreg" role="tab" aria-controls="v-pills-messages" aria-selected="false">Driver</a>
+                <a class="nav-link" id="poliing" data-toggle="pill" href="#Creg" role="tab" aria-controls="v-pills-messages" aria-selected="false">Car</a>
+
               </div>
             </div>
             <div class="col-9">
               <div class="tab-content" id="v-pills-tabContent">
+                <!-- start of add to pro ref -->
                 <div class="tab-pane fade show active" id="addref" role="tabpanel" aria-labelledby="v-pills-home-tab">
                   <div class="container border mt-4">
                     <div style="text-align: center;"><h3 id="header">Add to produc reference</h3></div>
@@ -99,7 +105,7 @@
                       </div>
                       <div class="form-group row pl-5">
                         <button type="button" class="btn btn-success" id="Add">Add</button>
-                        <button type="button" class="btn btn-danger ml-3" id="Cancel">Cancel</button>
+                        <button type="button" class="btn btn-danger ml-3" onclick="clear();" id="Cancel">Cancel</button>
                         <div class="alert" role="" id="AEload" hidden>
                           <div class="spinner center mt-3">
                             <div class="spinner-blade"></div>
@@ -123,16 +129,436 @@
                     </form>
                   </div>
                 </div>
-                <div class="tab-pane fade" id="addtoinv" role="tabpanel" aria-labelledby="v-pills-profile-tab">addtoinv</div>
-                <div class="tab-pane fade" id="addtoinv" role="tabpanel" aria-labelledby="v-pills-messages-tab">edaloor</div>
-                
+                <!-- end of add to pro ref -->
+                <!-- start of add to inventory -->
+                <div class="tab-pane fade" id="addtoinv" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+                  <div class="col border mt-3">
+                    <div style="text-align: center;" id="hqinlb"><h3>Add to inventory</h3></div>
+                    <hr>
+                    <div class="row mt-3 pl-5 mb-2">
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="customRadioInline1" name="customRadioInline1" class="custom-control-input" checked>
+                        <label class="custom-control-label" for="customRadioInline1">Add</label>
+                      </div>
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="customRadioInline2" name="customRadioInline1" class="custom-control-input">
+                        <label class="custom-control-label" for="customRadioInline2">Edit</label>
+                      </div>
+                    </div>
+                    <div id="conSearch" hidden>
+                      <div class="col-6 ml-3">
+                        <div class="input-group mt-4 ">
+                          <input type="text" class="form-control" placeholder="Search by Produc ID" aria-label="Recipient's username" aria-describedby="button-addon2" id="search-input2">
+                          <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="button" id="button-addon3"><i class="fa fa-search" aria-hidden="true"></i> Search</button>
+                          </div>
+                        </div>
+                        <ul id="autocomplete-list2" hidden></ul>
+                      </div>
+                      <small class="text-muted ml-4">Make sure you dont change the search input valule if you want to commit an edit</small>
+                    </div>
+                    <form class="mt-4">
+                      <div class="col-4 ml-3">
+                        <div><label for="DFname">Product Name</label></div>
+                        <input type="text" class="form-control" id="Namepro" placeholder="Product Name">
+                        <ul id="autocomplete-list3" hidden></ul>
+                      </div>
+                     <div class="row ml-3">
+                      <div class="col-4 mt-2">
+                        <div><label for="">Production Date</label></div>
+                        <input type="date" class="form-control" id="proDate">
+                      </div>
+                      <div class="col-4  mt-2">
+                        <div><label for="">Expration Date</label></div>
+                        <input type="date" class="form-control" id="ExpDate">
+                      </div>
+                     </div>
+                     <div class="col-4 ml-3">
+                      <div><label for="DFname">Number of caces</label></div>
+                      <input type="text" class="form-control" id="Hqiv" placeholder="Value">
+                    </div>
+                      <div class="row ml-4 pl-2 mt-3 mb-3">
+                        <button type="button" class="btn btn-success" id="Add2">Add</button>
+                        <button type="button" class="btn btn-warning ml-3" id="Cancel3">Cancel</button>
+                        <button type="button" class="btn btn-danger ml-3" id="Delete3" hidden>Delete</button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+                <!-- end of add to inventory -->
+
+                <!-- start of product listing -->
+                <div class="tab-pane fade pt-2" id="prolist" role="tabpanel" aria-labelledby="v-pills-messages-tab">
+                  <div class="row search-con" >
+                    <div class="col-6" id="searchCon" hidden>
+                      <div class="input-group mb-3 mt-4">
+                        <input type="text" class="form-control" placeholder="ID" aria-label="Recipient's username" aria-describedby="button-addon2" id="Lisearchinput">
+                        <div class="input-group-append">
+                          <button class="btn btn-outline-secondary" type="button" id="LIsearchBu"><i class="fa fa-search" aria-hidden="true"></i>Search</button>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-3">
+                      <div>Select</div>
+                      <select class="form-control col" id="Select">
+                        <option>Inventory</option>
+                        <option>Deliveryes</option>
+                        <option>Driver</option>
+                      </select>
+                    </div>
+                  </div>
+                  <table class="table table-striped mt-4" id="table" class="table">
+                   
+                  </table>
+                </div>
+                <!-- End of product Listing -->
+                <!-- start of Driver form -->
+                <div class="tab-pane fade" id="Dreg" role="tabpanel" aria-labelledby="v-pills-messages-tab">
+                  <div class="border col" style="text-align: center;"><h3>Driver form</h3></div>
+                  <hr>
+                  <div class="row mt-3 pl-5 mb-2">
+                    <div class="custom-control custom-radio">
+                      <input type="radio" id="customRadio5" name="customRadio2" class="custom-control-input" checked>
+                      <label class="custom-control-label" for="customRadio5">Add</label>
+                    </div>
+                    <div class="custom-control custom-radio ml-3">
+                      <input type="radio" id="customRadio6" name="customRadio2" class="custom-control-input">
+                      <label class="custom-control-label" for="customRadio6">Edit</label>
+                    </div>
+                  </div>
+                  <div id="DconSearch" hidden>
+                    <div class="col-8">
+                      <div class="input-group mt-4 ">
+                        <input type="text" class="form-control" placeholder="Search by Produc ID" aria-label="Recipient's username" aria-describedby="button-addon10" id="searcnInputDriver">
+                        <div class="input-group-append">
+                          <button class="btn btn-outline-secondary" type="button" id="button-addon20"><i class="fa fa-search" aria-hidden="true"></i> Search</button>
+                        </div>
+                      </div>
+                      <small class="text-muted">Make sure you dont change the search input valule if you want to commit an edit</small>
+                    </div>
+                  </div>
+                      <form class="mt-4">
+                        <div class="row">
+                          <div class="form-group col">
+                            <div><label for="DFname">FName</label></div>
+                            <input type="text" class="form-control" id="DFname" placeholder="F-name">
+                            <div><label for="Dsex">Sex</label></div>
+                            <select class="form-control col-7" id="Dsex">
+                              <option>Male</option>
+                              <option>Female</option>
+                            </select>
+                            <div><label for="DDOB">Date of birth</label></div>
+                            <input type="date" class="form-control col-7" id="DDOB">
+                          </div>
+                          <div class="form-group col l">
+                            <div><label for="DLname">LName</label></div>
+                            <input type="text" class="form-control " id="DLname" placeholder="L-name">
+                          </div>
+                          <div class="form-group pt-4">
+                            <input type="file" id="DfilePhate" class="mt-2">
+                          </div>
+                        </div>
+                        <div class="row ">
+                          <div class="form-group col-4 pl-0">
+                            <div class="form-group col">
+                              <div><label for="DHomeno">Home Number</label></div>
+                              <input type="text" class="form-control col-9" id="DHomeno" value="new">
+                            </div><div class="form-group col">
+                              <div><label for="DHomeno">Kebela</label></div>
+                              <input type="text" class="form-control col-9" id="Dkebela" placeholder="Kebela">
+                            </div>
+                          </div>
+                          <div class="col SC">
+                            <div class="row row-2">
+                              <div class="form-group col ">
+                                <div><label for="Dcity">City</label></div>
+                                <input type="text" class="form-control " id="Dcity" value="Addis Ababa" readonly>
+                              </div>
+                              <div class="form-group col ">
+                                <div><label for="DsubCity">SubCity</label></div>
+                                <select class="form-control col-9" id="DsubCity">
+                                  <option>Bole</option>
+                                  <option>Akaki Kaliti</option>
+                                  <option>Addis Ketema</option>
+                                  <option>Arada</option>
+                                  <option>Gulele</option>
+                                  <option>kirkos</option>
+                                  <option>Kolfe-Keranio</option>
+                                  <option>Lideta</option>
+                                  <option>Nifas Silk-Lafto</option>
+                                  <option>Yeka</option>
+                                </select>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="form-group col-4">
+                            <div><label for="Dphone1">Phone Number 1</label></div>
+                            <input type="text" class="form-control" id="Dphone" placeholder="Pnone Number">
+                          </div>
+                          <div class="form-group col-4">
+                            <div><label for="Dphone2">Phone Number 2</label></div>
+                            <input type="text" class="form-control " id="Dphone2" placeholder="Pnone Number">
+                          </div>
+                        </div>
+                        <div class="row ">
+                          <div class="form-group col-4" id="emcon">
+                            <div><label for="Demail">Email</label></div>
+                            <input type="email" class="form-control" id="Demail" placeholder="Exampil@gmail.com">
+                            <div class="alert" role="" id="DEmloder" hidden>
+                              <div class="spinner center mt-3">
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <small class="text-muted" id="olla" hidden>old car</small>
+                        <hr id="hrl" hidden>
+                        <div class="row" id="oldcarcon" hidden>
+                          <div class="form-group col-4">
+                            <div><label for="Dphone2">car</label></div>
+                            <input type="text" class="form-control " id="PDcar"  disabled>
+                          </div>
+                          <div class="form-group col-4">
+                            <div><label for="Dphone2">model</label></div>
+                            <input type="text" class="form-control " id="PDmodel"  disabled>                
+                          </div>
+                          <div class="form-group col-4">
+                            <div><label for="Dphone2">Plate Number</label></div>
+                            <input type="text" class="form-control " id="PDplat"  disabled>
+                          </div>
+                        </div>
+                        <small class="text-muted">Assign a car to this driver</small>
+                        <hr>
+                        <div class="col-3">
+                          <div class="input-group-text" id="comit" hidden>
+                            <input type="checkbox" aria-label="Checkbox for following text input" id="Dinfocom">
+                            <label for="" class="ml-3 mt-1">Add new car info</label>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="form-group col-4">
+                            <div><label for="car">Car</label></div>
+                            <select class="form-control col-7" id="car">
+                              <option>sample</option>
+                              <option>sample</option>
+                              <option>sample</option>
+                              <option>sample</option>
+                            </select>
+                          </div>
+                          <div class="form-group col-4">
+                            <div><label for="model">Model</label></div>
+                            <select class="form-control col-7" id="Dmodel" >
+                              <option>sample</option>
+                              <option>sample</option>
+                              <option>sample</option>
+                              <option>sample</option>
+                            </select>
+                            <div class="alert  pr-3" role="" id="Mloder" hidden>
+                              <div class="spinner center ml-5 ">
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                              </div>
+                            </div>
+                            
+                          </div>
+                          <div class="form-group col-4">
+                            <div><label for="car">Plate Number</label></div>
+                            <select class="form-control col-7" id="plate">
+                              <option>sample</option>
+                              <option>sample</option>
+                              <option>sample</option>
+                              <option>sample</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="form-group row-3">
+                            <button type="button" class="btn btn-primary" id="Dregs">Register</button>
+                            <button type="button" class="btn btn-warning ml-3" id="Dcan">Cancel</button>
+                            <button type="button" class="btn btn-danger ml-3" id="Ddele" hidden>Delete</button>
+                          </div>
+                          <div class="row">
+                            <div class="alert" role="" id="Dreglod" hidden>
+                              <div class="spinner center mt">
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                              </div>
+                            </div>
+                            <div class="alert alert-success" role="alert" id="Dregsuss" hidden>
+                            </div>
+                          </div>
+                        </div>
+                      </form>
+                </div>
+                <!-- end of driver form -->
+                <!-- start of car fomr -->
+                <div class="tab-pane fade" id="Creg" role="tabpanel" aria-labelledby="v-pills-messages-tab">
+                  <div class="col" style="text-align: center;"><h3>Driver Register form</h3></div>
+                  <hr>
+                  <div class="row mt-3 pl-5 mb-2">
+                    <div class="custom-control custom-radio">
+                      <input type="radio" id="customRadio10" name="customRadio4" class="custom-control-input" checked>
+                      <label class="custom-control-label" for="customRadio10">Add</label>
+                    </div>
+                    <div class="custom-control custom-radio ml-3">
+                      <input type="radio" id="customRadio11" name="customRadio4" class="custom-control-input">
+                      <label class="custom-control-label" for="customRadio11">Edit</label>
+                    </div>
+                  </div>
+                  <div id="CconSearch" hidden>
+                    <div class="col-8">
+                      <div class="input-group mt-4 ">
+                        <input type="text" class="form-control" placeholder="Search by Produc ID" aria-label="Recipient's username" aria-describedby="button-addon10" id="searcnInputCar">
+                        <div class="input-group-append">
+                          <button class="btn btn-outline-secondary" type="button" id="button-addon10"><i class="fa fa-search" aria-hidden="true"></i> Search</button>
+                        </div>
+                      </div>
+                      <small class="text-muted">Make sure you dont change the search input valule if you want to commit an edit</small>
+                    </div>
+                  </div>
+                  <form class="mt-4">
+                      <div class="row">
+                          <div class="form-group col-4">
+                            <div><label for="DFname">Name</label></div>
+                            <input type="text" class="form-control" id="name" placeholder="Car Name">
+                          </div>
+                          <div class="form-group col-4">
+                            <div><label for="DFname">Model</label></div>
+                            <input type="text" class="form-control" id="model" placeholder="Car Model">
+                            <div class="alert alert-warning" role="alert" id="EMmodel" hidden>
+                              Invalid data type Enater a Number
+                            </div>
+                           
+                            <div class="alert alert-warning" role="alert" id="EMIVmodel" hidden>
+                              The Model you Enterd is invalid
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="form-group col-4">
+                            <div><label for="DFname">Maximum payload</label></div>
+                            <div class="input-group">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1">Ton</span>
+                              </div>
+                              <input type="text" class="form-control" id="max" placeholder="Maximum" aria-label="Username" aria-describedby="basic-addon1">
+                            </div>
+                            <div class="alert alert-warning" role="alert" id="EMmax" hidden>
+                              Invalid data type Enater a Number
+                            </div>
+                            <div class="alert  pr-3" role="" id="MAloder" hidden>
+                              <div class="spinner center">
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="form-group col-4">
+                            <div><label for="DFname">Minimum payload</label></div>
+                            <div class="input-group">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1">Ton</span>
+                              </div>
+                              <input type="text" class="form-control" id="min" placeholder="Minimum" aria-label="Username" aria-describedby="basic-addon1">
+                            </div>
+                            <div class="alert alert-warning" role="alert" id="EMmin" hidden>
+                              Invalid data type Enater a Number
+                            </div>
+                            <div class="alert alert-warning" role="alert" id="gErr" hidden>
+                            </div>
+                          </div>
+                        </div>
+                        <small class="text-muted">Plate Number</small>
+                        <hr>
+                        <div class="row">
+                          <div class="form-group col-4">
+                            <div><label for="DFname">Plate Number</label></div>
+                            <input type="text" class="form-control" id="quan" placeholder="Plate Number">
+                            <div class="alert alert-warning" role="alert" id="EMquan" hidden>
+                              Invalid data type Enater a Number
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="form-group row-3">
+                            <button type="button" class="btn btn-primary" id="Cregs">Register</button>
+                            <button type="button" class="btn btn-warning ml-3" id="Ccan">Cancel</button>
+                            <button type="button" class="btn btn-danger ml-3" id="Cdle" hidden>Delete</button>
+                          </div>
+                          <div class="row">
+                            <div class="alert" role="" id="Creglod" hidden>
+                              <div class="spinner center mt">
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                                <div class="spinner-blade"></div>
+                              </div>
+                            </div>
+                            <div class="alert alert-success" role="alert" id="Cregsuss" hidden>
+                            </div>
+                          </div>
+                        </div>
+                      </form>
+                </div>
+                <!-- end fo car form -->
+              
               </div>
             </div>
           </div>
     </div>
 
 </body>
-
 <script src="js/hq.js"></script>
 <script
 src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
