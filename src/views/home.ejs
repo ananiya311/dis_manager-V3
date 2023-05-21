@@ -875,7 +875,39 @@
                 </div>
                 <div class="col-9">
                   <div class="tab-content" id="v-pills-tabContent">
-                    <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">1</div>
+                    <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+                      <div class="col border mt-3">
+                        <div style="text-align: center;" id="hqinlb"><h3>Add to inventory</h3></div>
+                        <hr>
+    
+                        <div id="conSearch">
+                          <div class="col-9 ml-3">
+                            <div class="input-group mt-4 ">
+                              <input type="text" class="form-control" placeholder="Search by Driver ID" aria-label="Recipient's username" aria-describedby="button-addon2" id="search-input2">
+                              <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="button" id="button-addon3"><i class="fa fa-search" aria-hidden="true"></i> Search</button>
+                              </div>
+                            </div>
+                          </div>
+                          <small class="text-muted ml-4">Make sure you dont change the search input valule if you want to commit the data</small>
+                        </div>
+                        <table class="table">
+                          <thead>
+                            <tr>
+                              <th scope="col">#ID</th>
+                              <th scope="col">Product Name</th>
+                              <th scope="col">Number of caces</th>
+                              <th scope="col">#</th>
+                            </tr>
+                          </thead>
+                          <tbody id="itemList" class="itemList">
+                          </tbody>
+                        </table>
+                        <div class="form-group row-3">
+                          <button type="button" class="btn btn-primary" id="Addinve">Add</button>
+                        </div>
+                      </div>
+                    </div>
                     <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">2</div>
                     <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">3.</div>
                     <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">4</div>

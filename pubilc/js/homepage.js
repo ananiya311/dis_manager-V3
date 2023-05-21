@@ -1182,7 +1182,83 @@ proconDOM.addEventListener('click', async (e) => {
 // }
 
 
-const date = ()=>{
-     axios.post('/test')
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+// invantory manager //////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+const itemList = document.getElementById('itemList')
+const Searchinput = document.getElementById('search-input2')
+const searchButton2 = document.getElementById('button-addon3')
+const report = document.querySelector('.itemList')
+const Addinve = document.getElementById('Addinve')
+
+var list = []
+
+searchButton2.addEventListener('click', async()=>{
+     list.length = 0
+     await axios.post('/HQgetdelver', {Drivarid: Searchinput.value}).then(async({data})=>{
+          const {_id, ProductList, Drivarid} = data[0];
+          for (let index = 0; index < ProductList.length; index++) {
+                list.push(ProductList[index]);
+          }
+          const html = list.map((data)=>{
+               const {id, productName, NumerOfCece} = data
+               return `
+               <tr>
+                    <th scope="row"> ${id} </th>
+                    <td>${productName}</td>
+                    <td>${NumerOfCece}</td>
+                    <td class = "report" data-id=${id}>Reprot as Damage</td>
+               </tr>`
+          }).join('')
+          itemList.innerHTML = html
+         
+     })
+})
+
+const repopulate = (list)=>{
+     const html = list.map((data)=>{
+          const {id, productName, NumerOfCece} = data
+          return `
+          <tr>
+               <th scope="row"> ${id} </th>
+               <td>${productName}</td>
+               <td>${NumerOfCece}</td>
+               <td class = "report" data-id=${id}>Reprot as Damage</td>
+          </tr>`
+     }).join('')
+     itemList.innerHTML = html 
 }
 
+report.addEventListener('click', (e)=>{
+     const E = e.target
+     if(E.classList.contains('report')){
+          const pid = E.dataset.id
+          for (let index = 0; index < list.length; index++) {
+               const {id} = list[index]
+               if(id === pid){
+                    console.log(list[index]);
+                    list.splice(index,1)
+                    repopulate(list)
+               }   
+          }
+     }else{
+          console.log(false);
+     }
+})
+
+
+Addinve.addEventListener('click', async()=>{
+     if(list.length > 0 ){
+          await axios.post('homePage/AddToInv',{
+               list: list
+          }).then(()=>{
+               alert("products add to inventory")
+          })
+          console.log("asdfasdf");
+     }else{
+          console.log("asdfaffffffffffffffffffffffffffffff");
+     }
+})

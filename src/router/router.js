@@ -9,6 +9,7 @@ const users = require('../module/usersModule')
 const cars = require('../module/carModule')
 const driveres = require('../module/driverModule')
 const product  = require('../module/productsModule')
+const homeInv = require('../module/homeinv')
 const prodcutRef = require('../module/ProductRef')
 const ProductRef = require('../module/ProductRef')
 const HQinv = require('../module/HQinv')
@@ -303,6 +304,23 @@ route.delete('/delete', async(req, res)=>{
         })
     }
 })
+
+/// home page invantory manger
+route.post('/homePage/AddToInv', async(req, res)=>{
+    try {
+        const list = req.body.list
+        for (let index = 0; index < list.length; index++) {
+            const {id} = list[index];
+            await HQinv.findOne({_id: id}).then((data)=>{
+                const {ProductName, picPerCase, pricePerCase,pricePerpices, proDate, expDAte} = data
+                
+            })
+        }
+    } catch (error) {
+     res.status(404).send("error")
+    }
+ })
+
 
 // HQ
 route.get('/HQ', async(req, res)=>{

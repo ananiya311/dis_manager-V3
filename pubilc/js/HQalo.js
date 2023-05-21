@@ -216,8 +216,15 @@ const ALpopulatelist = async()=>{
            return `<option>${firstName} ${lastName}</option>` 
         }).join('')
         ALDriverName.innerHTML = html
+        console.log(html
+            );
         await ALIP()
     })
+}
+
+window.onload = async()=>{
+    await ALpopulatelist()
+    console.log("asdf");
 }
 
 ALDriverName.addEventListener('change', async()=>{
@@ -250,6 +257,8 @@ ALcom.addEventListener('click', async()=>{
                 exportHTML()
                 await ALpopulatelist()
                 await ALIP()
+                dalivaryList.length = 0
+                ALtableBody.innerHTML = ""
             })
         }else{
             if (ALsedriverName.value, ALdriverId.value, ALplateNumber.value) {
@@ -261,6 +270,9 @@ ALcom.addEventListener('click', async()=>{
                     exportHTML()
                     await ALpopulatelist()
                     await ALIP()
+                    dalivaryList.length = 0
+                    ALtableBody.innerHTML = ""
+                    console.log("soumting");
                 })
             }
         }
