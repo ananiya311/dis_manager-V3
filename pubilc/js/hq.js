@@ -491,6 +491,30 @@ const driver = `
                     </thead>
 
 `
+
+const damageRpo = `
+                    <thead>
+                        <tr>
+                            <th scope="col">#ID</th>
+                            <th scope="col">Prodcut Name</th>
+                            <th scope="col">Prodcution Date</th>
+                            <th scope="col">Experation Date</th>
+                            <th scope="col">Number Caces</th>
+                        </tr>
+                    </thead>
+
+`
+
+const order = `
+                    <thead>
+                        <tr>
+                            <th scope="col">Order ID</th>
+                            <th scope="col">##</th>
+                        </tr>
+                    </thead>    
+
+`
+
 const POproduct = async()=>{
     await axios.post('HQ/getInv',{}).then(({data:{data}})=>{
         const html = data.map((test)=>{
@@ -582,6 +606,46 @@ const PODriver = async(s = "none")=>{
     }
 }
 
+const POreport = async(s = "none")=>{
+   
+    if(s == 'none'){
+        await axios.post('/HQgetRepo').then((Data)=>{
+            const {data} = Data
+            const html = data.map((D)=>{
+                const {_id, productName, proDate, expDate, NumerOfCece} = D
+                return `
+                        <tr>
+                            <th scope="row">${_id}</th>
+                            <td>${productName}</td>
+                            <td>${proDate.split('T')[0]}</td>
+                            <td>${expDate.split('T')[0]}</td>
+                            <td>${NumerOfCece}</td>                   
+                        </tr>
+                
+                `
+            }).join('')
+            tbody.innerHTML = damageRpo + headerO + html + headerC
+        })
+    }
+}
+
+const POorder = async()=>{
+    await axios.post('/getOrder').then(({data})=>{
+        const html = data.map((Data)=>{
+            const {_id} = Data
+            return `
+            <tr>
+            <th scope="row">${_id}</th>
+            <td><a href='Allocate?stat=order&id=${_id}'>Respons</a></td>                   
+            </tr>
+            
+            `
+        }).join('')
+        tbody.innerHTML = order + headerO + html + headerC
+        console.log(data);
+    })
+}
+
 Lisearchbutton.addEventListener('click', async()=>{
     if(Lisearch.value){
         if(Liselect.value == "Deliveryes"){
@@ -604,6 +668,7 @@ link.addEventListener('click', async()=>{
 })
 
 Liselect.addEventListener('change', async()=>{
+    
     if(Liselect.value == "Inventory"){
         searchCon.hidden = true
         await POproduct()
@@ -616,6 +681,16 @@ Liselect.addEventListener('change', async()=>{
         searchCon.hidden = false
         console.log("asdfasdf");
         await PODriver()   
+    }else if(Liselect.value == 'Damage Repor'){
+        Lisearch.value = ''
+        searchCon.hidden = true
+        console.log("repoort");
+        await POreport()
+    }else if(Liselect.value == 'Orders'){
+        Lisearch.value = ''
+        searchCon.hidden = true
+        await POorder()
+        console.log("orders");
     }
 })
 

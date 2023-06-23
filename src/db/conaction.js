@@ -11,7 +11,7 @@ const connect = (url)=>{
         console.log("connected successfuly");
     })
    } catch (error) {
-    console.log("test");
+    console.log(error);
    }
 }
 

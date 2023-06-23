@@ -1,4 +1,4 @@
-#autocomplete-list, #autocomplete-list3, #autocomplete-list4 {
+#autocomplete-list, #autocomplete-list3, #autocomplete-list4, #autocomplete-list-req{
   list-style: none;
   margin: 0;
   padding: 0;
@@ -11,12 +11,12 @@
   overflow-y: auto;
 }
 
-#autocomplete-list li, #autocomplete-list3 li, #autocomplete-list4 li{
+#autocomplete-list li, #autocomplete-list3 li, #autocomplete-list4 li, #autocomplete-list-req li{
 padding: 10px;
 cursor: pointer;
 }
 
-#autocomplete-list li:hover , #autocomplete-list3 li:hover, #autocomplete-list4 li:hover {
+#autocomplete-list li:hover , #autocomplete-list3 li:hover, #autocomplete-list4 li:hover, #autocomplete-list-req li:hover {
 background-color: #ddd;
 color: white;
 }
@@ -68,10 +68,6 @@ color: white;
 .bodyRE button:hover{
   cursor: pointer
 }
-
-
-
-
 
 
 
@@ -195,4 +191,14 @@ color: white;
 .bodyRE{
   margin: 0 auto;
   width: 900px;
+}
+
+
+/* /////////////////////// */
+
+#reqcon{
+  overflow: scroll;
+  width: 700px;
+  height: 235px;
+ 
 }

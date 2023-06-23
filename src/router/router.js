@@ -10,12 +10,15 @@ const cars = require('../module/carModule')
 const driveres = require('../module/driverModule')
 const product  = require('../module/productsModule')
 const homeInv = require('../module/homeinv')
+const homedillist = require('../module/homedel')
 const prodcutRef = require('../module/ProductRef')
 const ProductRef = require('../module/ProductRef')
 const HQinv = require('../module/HQinv')
 const HQdriver = require('../module/HQdriver')
 const HQcar = require('../module/HQcar')
 const HQdalivarL = require('../module/HQdealivarylist')
+const damrpo = require('../module/Damrepo')
+const requestMo = require('../module/requist')
 
 
 const baceimgUri = "C:/Users/ananiya muluken/Pictures"
@@ -309,18 +312,119 @@ route.delete('/delete', async(req, res)=>{
 route.post('/homePage/AddToInv', async(req, res)=>{
     try {
         const list = req.body.list
+        const Did = req.body.Did
+        const DEid = req.body.DEid
         for (let index = 0; index < list.length; index++) {
-            const {id} = list[index];
-            await HQinv.findOne({_id: id}).then((data)=>{
-                const {ProductName, picPerCase, pricePerCase,pricePerpices, proDate, expDAte} = data
-                
+            const {productName} = list[index];
+            await prodcutRef.findOne({ProductName: productName}).then(async(data)=>{
+                const {ProductName, picPerCase, pricePerCase, pricePerpices} = data
+                const tempop = {
+                    ProductName: ProductName,
+                    picPerCase: picPerCase,
+                    pricePerCase: pricePerCase,
+                    pricePerpices: pricePerpices,
+                    proDate: list[index].proDate,
+                    expDAte: list[index].expDate,
+                    inStock: list[index].NumerOfCece
+                }
+                await homeInv.create(tempop)
             })
         }
+        await HQdriver.updateOne({_id:DEid}, {avilavile: true}).then(async()=>{
+            await HQdalivarL.deleteOne({_id:Did})
+        })    
+        res.status(200).send("ok")
     } catch (error) {
-     res.status(404).send("error")
+        console.log(error);
+        res.status(404).send("error")
     }
  })
 
+route.post('/homepage/getinv', async(req, res)=>{
+    try{
+        const data = await homeInv.find(req.body)
+        res.status(200).json({data})
+    }catch(error){
+        res.status(404).send('error')
+    }
+})
+
+route.post('/homepage/report',async(req, res)=>{
+    const {Data} = req.body
+    try {
+        damrpo.create(Data)        
+        res.status(200).send("ok")
+    } catch (error) {
+        res.status(404).json(error)
+    }
+})
+
+route.post('/homepage/alo', async(req, res)=>{
+    try{
+        const {driverID, productList} = req.body
+        
+        const file = await homedillist.create({
+            Drivarid:driverID,
+            ProductList:productList
+        }).then( async (file)=>{
+            for (let i = 0; i < productList.length; i++) {
+                const {id, NumerOfCece} = productList[i];
+                await homeInv.findOne({_id: id}).then(async(data)=>{
+                    const {inStock} = data
+                    if(inStock === NumerOfCece){
+                        await homeInv.deleteOne({_id:id})
+                    }else{
+                        await homeInv.updateOne({_id:id}, {inStock: inStock - NumerOfCece})
+                    }
+                })
+            }
+            await driveres.updateOne({_id:driverID}, {avilavile: false, paylode:productList}).then(async(data)=>{
+                console.log(data);
+            })
+            res.json(file).status(200)
+        })
+
+
+    }catch(err){
+        console.log(err);
+        res.status(404).send('Cancel')
+    }
+})
+
+route.post('/home/getDlist', async(req, res)=>{
+    try {
+        console.log(req.body);
+        await homedillist.find(req.body).then((data)=>{
+            console.log(data);
+            res.status(200).json(data)
+        })
+    } catch (error) {
+        res.status(404).json(error)
+    }
+})
+
+route.post('/DRS/returnes', async(req, res)=>{
+    try {
+        await homedillist.findOne(req.body).then(async(data)=>{
+            const {ProductList} = data
+            for (let index = 0; index < ProductList.length; index++) {
+                if(ProductList[index].NumerOfCece != 0){
+                    await homeInv.findOne({_id: ProductList[index].id}).then(async(data)=>{
+                        const {inStock} = data
+                        await homeInv.updateOne({_id: ProductList[index].id}, {inStock: parseInt(inStock) + parseInt(ProductList[index].NumerOfCece)})
+                    })
+                }
+                
+            }
+        })
+        await homedillist.deleteOne(req.body)
+        await driveres.updateOne({_id: req.body.Drivarid}, {avilavile: true, paylode:[]})
+        res.status(200).send("ok")
+    } catch (error) {
+        console.log(error);
+        res.status(404).json(error)
+    }
+})
 
 // HQ
 route.get('/HQ', async(req, res)=>{
@@ -590,4 +694,104 @@ route.post('/HQdelvercancel', async(req, res)=>{
     }
 })
 
+route.post('/HQgetRepo', async(req, res)=>{
+    try{
+        await damrpo.find(req.body).then((data)=>{
+            res.status(200).json(data)
+        })
+    }catch(err){
+        res.status(404).json(err)
+    }
+
+})
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// DDS
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+route.get('/DRS', async(req, res)=>{
+    res.render('Dlogin.ejs')
+})
+
+route.post('/Dlog-var', async(req, res)=>{
+    try {
+        const {email, password} = req.body
+        const file = await driveres.findOne({PassWorde:password, Email:email})
+        if(file != null){
+            res.cookie(`DRS`,`${file._id}`,{
+                expires: new Date('5 11 2033'),
+                secure: true,
+                httpOnly: true,
+                sameSite: 'lax'
+            });
+            console.log("Asdf");
+            res.send({var:true}).status(200);
+        }else{
+            res.send({var:false}).status(200);
+        }
+        
+    } catch (error) {
+        console.log(error);
+        res.status(404).json(error)
+    }
+})
+
+route.get('/Dhomepage', async(req, res)=>{
+    console.log(req.cookies.DRS);
+    res.render('Dhome.ejs')
+})
+
+route.get('/Drs/getpro',async(req, res)=>{
+    try {
+        await driveres.findOne({_id:req.cookies.DRS}).then((data)=>{
+            res.status(200).json(data)
+        })
+    } catch (error) {
+        res.status(400).send('canceld')
+    }
+})
+
+route.post('/Drs/mkaeSell', async(req, res)=>{
+    try {
+        const {proName, NumberOfcaces, _id, Did} = req.body
+        await homedillist.findOne({_id: _id}).then(async(data)=>{
+            const {ProductList} = data
+            var temp = ProductList
+            for (let index = 0; index < ProductList.length; index++) {
+                if(ProductList[index].productName === proName){
+                    temp[index].NumerOfCece -= NumberOfcaces
+                } 
+            }
+            await homedillist.updateOne({_id: _id}, {ProductList: temp})
+            await driveres.updateOne({_id: Did}, {avilavile: true})
+        })
+        console.log("done");
+        res.status(200).send("ok")
+    }catch(Err){
+        res.status(404).json(Err)
+    }
+})
+
+// request routs //////
+///////////////////////////////////////////////
+
+route.post('/send/request', async(req, res)=>{
+   try {
+        await requestMo.create(req.body)
+        res.status(200).send('OK')
+   } catch (error) {
+        res.status(404).json(error)
+   }
+})
+
+route.post('/getOrder', async(req, res)=>{
+    try {
+        await requestMo.find(req.body).then((Data)=>{
+            res.status(200).json(Data)
+        })
+    } catch (error) {
+        res.status(404).json(error)
+    }
+})
+ 
 module.exports = route

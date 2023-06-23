@@ -21,7 +21,7 @@ const HQinv = mongodb.Schema({
         type:Date
     }
     ,inStock:{
-        type:String
+        type:Number
     }
 })
 

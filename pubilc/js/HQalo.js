@@ -1,5 +1,6 @@
 const urlParams = new URLSearchParams(window.location.search);
 const quary = urlParams.get('stat');
+var order_id 
 
 const proALLList = document.getElementById('proALL')
 
@@ -58,11 +59,14 @@ const ALUpdate = async()=>{
 //     await ALpopulatelist()
 // })
 
+
 window.onload = async ()=>{
     await ALUpdate()
     await ALpopulatelist()
     await ALUpdate()   
 }  
+
+
 
 const ALupdateAutocompleteList = async () => {
     await ALUpdate()
@@ -140,13 +144,18 @@ const ALpopulateTable = async(ob)=>{
 ALLadd.addEventListener('click', async()=>{
     if(parseInt(ALnumberOfcaces.value)){
         if(parseInt(ALnumberOfcaces.value) <= tempid.split('-')[0]){
-            const ob = {
-                productName : ALprodcutName.value,
-                id:tempid.split('-')[1],
-                NumerOfCece:ALnumberOfcaces.value
-            }
-            console.log(dalivaryList);
-            dalivaryList.push(ob)
+            await axios.post('HQ/getInv', {_id:tempid.split('-')[1]}).then(({data})=>{
+                const {_id,proDate, expDAte} = data.data[0]
+                const ob = {
+                    productName : ALprodcutName.value,
+                    id:tempid.split('-')[1],
+                    NumerOfCece:ALnumberOfcaces.value,
+                    expDate:expDAte.split('T')[0],
+                    proDate:proDate.split('T')[0]
+                }
+                console.log(dalivaryList);
+                dalivaryList.push(ob)
+            })
             await ALpopulateTable(dalivaryList)
             ALprodcutName.value = ""
             ALnumberOfcaces.value = ""
@@ -216,15 +225,54 @@ const ALpopulatelist = async()=>{
            return `<option>${firstName} ${lastName}</option>` 
         }).join('')
         ALDriverName.innerHTML = html
-        console.log(html
-            );
+        console.log(html);
         await ALIP()
     })
 }
-
+//////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////
 window.onload = async()=>{
+    var errmes = ''
+    var iserr = false
     await ALpopulatelist()
-    console.log("asdf");
+    if(quary == 'order'){
+        order_id = urlParams.get('id');
+        axios.post('/getOrder', {_id: order_id}).then(async({data})=>{
+            const {items} = data[0]
+            console.log(items);
+            var value = []
+            for (let index = 0; index < items.length; index++) {
+                const {ProductName: Por, NumberOfcases: Pon} = items[index];
+                console.log(items[index]);
+                console.log(Pon);
+                await axios.post('/HQ/getInv',{$and:[{ProductName: Por}, {inStock:{$gte: Pon}}]}).then(({data})=>{
+                    if(data.data.length > 0){
+                        const {_id, ProductName, proDate, expDAte} = data.data[0]
+                        const ob = {
+                            productName:ProductName,
+                            id:_id,
+                            NumerOfCece:Pon,
+                            expDate:expDAte.split('T')[0],
+                            proDate:proDate.split('T')[0],
+                        }
+                        dalivaryList.push(ob)
+                    }else{
+                        errmes += ` ${Por}`
+                        iserr = true
+                    }
+                }) 
+            }
+            if(iserr){
+                alert(`you dont have enough items int the inventory for the following item ${errmes}, to response to an order you have to wait till these items are available.`)
+                window.location.href="/HQ"
+            }else{
+                await ALpopulateTable(dalivaryList)
+            }
+        })
+    }else{
+        console.log("false");
+    }
 }
 
 ALDriverName.addEventListener('change', async()=>{
@@ -259,6 +307,9 @@ ALcom.addEventListener('click', async()=>{
                 await ALIP()
                 dalivaryList.length = 0
                 ALtableBody.innerHTML = ""
+                if(quary == 'order'){
+
+                }
             })
         }else{
             if (ALsedriverName.value, ALdriverId.value, ALplateNumber.value) {

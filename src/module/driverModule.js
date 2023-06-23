@@ -79,6 +79,10 @@ const driver = mongodb.Schema({
     Status:{
         type:String,
         default:"Driver"
+    },
+    avilavile:{
+        type:Boolean,
+        default: true
     }
     
 })

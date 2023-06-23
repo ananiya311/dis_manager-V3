@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        #autocomplete-list3, #autocomplete-list2 {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            position: absolute;
+            z-index: 1;
+            width: 100%;
+            background-color: #ffffff;
+            border: 1px solid #868686;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        #autocomplete-list3 li, #autocomplete-list2 li {
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        #autocomplete-list3 li:hover, #autocomplete-list2 li:hover{
+            background-color: #ddd;
+            color: white;
+        }
+
+        body {
+            padding-top: 80px;
+            background-color: #f8f9fa;
+        }
+
+        .navbar-brand img {
+            margin-right: 5px;
+        }
+
+        .nav-pills .nav-link {
+            font-size: 14px;
+        }
+
+        .tab-content {
+            margin-top: 30px;
+        }
+
+        .form-group label {
+            font-weight: bold;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="number"] {
+            border-radius: 5px;
+        }
+        .top span h3{
+            color: green;
+        }
+        body{
+            background-color: #dddddd;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar bg fixed-top" style="background-color: rgb(28, 39, 77);">
+        <a class="navbar-brand" href="/Dhomepage">
+            <img src="https://res.cloudinary.com/djfuaborr/image/upload/v1685452067/OIP-removebg-preview_1_y4zyeo.png" width="30" height="30" class="d-inline-block align-top" alt="">
+            unilivar 
+        </a>
+        <img src="https://o.remove.bg/downloads/aa1899e6-a2da-447a-9642-5c2afbf211ea/OIP-removebg-preview.png" id="propic"  height="80" width="80" alt="" style="border-radius: 100px;">
+    </nav>
+    <a href="/Dhomepage" id="test" hidden>asdf</a>
+    <ul class="nav nav-pills mb-3 mt-4 justify-content-center" id="pills-tab" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Sell a product</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Product Listing</a>
+        </li>
+    </ul>
+    <div class="tab-content ml-2 ml-2" id="pills-tabContent">
+        <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+            <div class="row ml-1 top">
+                <span><h3 id="totalPrice">0</h3></span>
+                <span><h3>Brr</h3></span>
+            </div>
+            <div class="row">
+                <div class="form-group col">
+                    <label for="Dphone">Product Name</label>
+                    <input type="text" class="form-control" id="Dphone" placeholder="Product Name">
+                    <ul id="autocomplete-list2" hidden>
+                       
+                    </ul>
+                </div>
+                <div class="form-group col">
+                    <label for="Dphone2">Number of Cases</label>
+                    <input type="number" class="form-control" id="Dphone2" placeholder="Number of Cases">
+                </div>
+            </div>
+            <div class="row ml-3">
+                <button type="button" class="btn btn-primary" id="reg">Make sell</button>
+                <button type="button" class="btn btn-danger ml-3" id="can">Cancel</button>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+            <div class="col">
+                <div class="input-group mt-4 ">
+                  <input type="text" class="form-control" placeholder="Search by Produc ID" aria-label="Recipient's username" aria-describedby="button-addon2" id="search-input2">
+                  <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="button" id="button-addon3"><i class="fa fa-search" aria-hidden="true"></i> Search</button>
+                  </div>
+                </div>
+                <ul id="autocomplete-list3" hidden></ul>
+            </div>
+            <table class="table table-striped mt-3">
+                <thead>
+                  <tr>
+                    <th scope="col">product name</th>
+                    <th scope="col">Number caces</th>
+                    <th scope="col">Price per-caces</th>
+                  </tr>
+                </thead>
+                <tbody id="tbody">
+                  <tr>
+                    <td>KNORR CHICKEN </td>
+                    <td>Otto</td>
+                    <td>@mdo</td>
+                  </tr>
+                </tbody>
+              </table>
+        </div>
+    </div>
+</body>
+<script src="js/Dhome.js"></script>
+<script
+src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
+integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
+crossorigin="anonymous"
+referrerpolicy="no-referrer"
+></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+</html>

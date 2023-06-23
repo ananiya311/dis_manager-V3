@@ -12,7 +12,7 @@
     <title>Document</title>
     
 </head>
-<!-- <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script> -->
+
 <body>
   
   <nav class="navbar navbar-expand-lg">
@@ -64,7 +64,7 @@
       </ul>
     </div>
   </nav>
-  <div class="container ">
+  <div>
     <div class="col ">
       <div class="tab-content" id="v-pills-tabContent">
         <!-- humanres -->
@@ -83,9 +83,9 @@
                 <div class="col-2 border-right mt-4 ml-3 pt-3 pb-3 mr-2">
                   <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                     <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-stemp" role="tab" aria-controls="v-pills-home" aria-selected="true">Staff Employee </a>
-                    <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-driver" role="tab" aria-controls="v-pills-profile" aria-selected="false">Driver</a>
+                    <a class="nav-link" id="regD" data-toggle="pill" href="#v-pills-driver" role="tab" aria-controls="v-pills-profile" aria-selected="false">Driver</a>
                     <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-cars" role="tab" aria-controls="v-pills-profile" aria-selected="false">Cars</a>
-                    <a class="nav-link" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-Estemp" role="tab" aria-controls="v-pills-home" aria-selected="true">Edit Staff info </a>
+                    <a class="nav-link" id="Estaff" data-toggle="pill" href="#v-pills-Estemp" role="tab" aria-controls="v-pills-home" aria-selected="true">Edit Staff info </a>
                     <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-Ecars" role="tab" aria-controls="v-pills-profile" aria-selected="false">Edit car info</a>
 
                   </div>
@@ -341,6 +341,10 @@
                               </div>
                             </div>
                           </div>
+                          <div class="form-group col-4">
+                            <div><label for="Demail">Password</label></div>
+                            <input type="password" class="form-control" id="Dpassword" placeholder="Exampil@gmail.com">
+                          </div>
                         </div>
                         <small class="text-muted">Assign a car to this driver</small>
                         <hr>
@@ -421,7 +425,7 @@
 
                     <!-- cars -->
                     <div class="tab-pane fade" id="v-pills-cars" role="tabpanel" aria-labelledby="v-pills-profile-tab">
-                      <div class="border col" style="text-align: center;"><h3>Driver Register form</h3></div>
+                      <div class="border col" style="text-align: center;"><h3>New car Register form</h3></div>
                       <form class="mt-4">
                         <div class="row">
                           <div class="form-group col-4">
@@ -865,12 +869,13 @@
           <div class="tab-content" id="myTabContent">
             <div class="tab-pane fade show active" id="MandA" role="tabpanel" aria-labelledby="home-tab">
               <div class="row mt-4">
-                <div class="col-3">
+                <div class="col-2">
                   <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                     <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Add to inventory</a>
-                    <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Profile</a>
-                    <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">Messages</a>
-                    <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">Settings</a>
+                    <a class="nav-link" id="homeaolo" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Assign products to Drivers</a>
+                    <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">Clearance and Cashin</a>
+                    <a class="nav-link" id="v-pills-lis-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">listing</a>
+                    <a class="nav-link" id="v-pills-lis-tab" data-toggle="pill" href="#v-pills-req" role="tab" aria-controls="v-pills-req" aria-selected="false">Request Products</a>
                   </div>
                 </div>
                 <div class="col-9">
@@ -896,7 +901,9 @@
                             <tr>
                               <th scope="col">#ID</th>
                               <th scope="col">Product Name</th>
-                              <th scope="col">Number of caces</th>
+                              <th scope="col">Prodcution Date</th>
+                              <th scope="col">Experation Date</th>
+                              <th scope="col">Caces</th>
                               <th scope="col">#</th>
                             </tr>
                           </thead>
@@ -905,12 +912,198 @@
                         </table>
                         <div class="form-group row-3">
                           <button type="button" class="btn btn-primary" id="Addinve">Add</button>
+                          <button type="button" class="btn btn-danger ml-3" id="Caninve">Cancel</button>
                         </div>
                       </div>
                     </div>
-                    <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">2</div>
-                    <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">3.</div>
-                    <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">4</div>
+                    <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+                      <div class="container border mt-3" style="border-radius: 10px;">
+
+                        <div style="text-align: center;"><h3>Product alocation form</h3></div>
+                        <hr>
+                        
+                        <div class="col-4">
+                            <div><label for="DFname">Product Name</label></div>
+                            <input type="text" class="form-control" id="ALNamepro" placeholder="Product Name">
+                            <ul id="autocomplete-list4" hidden></ul>
+                        </div>
+                        <div class="col-4 mb-3">
+                            <div><label for="Numberofcae">Number of caces</label></div>
+                            <input type="text" class="form-control" id="ALnumberOfCaces" placeholder="Number of caces">
+                        </div>
+                        
+                        <div class="form-group row-3 ml-3">
+                            <button type="button" class="btn btn-primary" id="ALadd">Add</button>
+                            <button type="button" class="btn btn-danger ml-3" id="ALcan">Cancel</button>
+                        </div>
+                        <table class="table table-striped mt-4 ALtable">
+                            <thead class="border">
+                            <tr>
+                                <th scope="col">#ID</th>
+                                <th scope="col">Prodcut Name</th>
+                                <th scope="col">Prodcution Date</th>
+                                <th scope="col">Experation Date</th>
+                                <th scope="col">Number Caces</th>
+                                <th scope="col">#</th>
+                            </tr>
+                            </thead>
+                            <tbody id="Allbody">
+                            
+                            </tbody>
+                        </table>
+                        <small class="text-muted">Select Driver to dalivar the product</small>
+                        <hr>
+                        <div class="row mt-3 pl-5 mb-2">
+                            <div class="custom-control custom-radio">
+                            <input type="radio" id="customRadio91" name="customRadio00" class="custom-control-input" checked>
+                            <label class="custom-control-label" for="customRadio91">Select from lists</label>
+                            </div>
+                            <div class="custom-control custom-radio ml-3">
+                            <input type="radio" id="customRadio92" name="customRadio00" class="custom-control-input">
+                            <label class="custom-control-label" for="customRadio92">Select by ID</label>
+                            </div>
+                        </div>
+                        <div id="ALconSearch" hidden>
+                            <div class="col-8">
+                            <div class="input-group mt-4 ">
+                                <input type="text" class="form-control" placeholder="Search by Driver ID" aria-label="Recipient's username" aria-describedby="button-addon10" id="ALidSelect">
+                                <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="button" id="AlsearchButton"><i class="fa fa-search" aria-hidden="true"></i>Search</button>
+                                </div>
+                            </div>
+                            <small class="text-muted">Make sure you dont change the search input valule if you want to commit an edit</small>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4">
+                            <div id="DriverListContainer">
+                                <div><label for="DriverName">Driver Name</label></div>
+                                <select class="form-control" id="ALDriverName">
+                                <option value="">sampile</option>
+                                </select>
+                            </div>
+                            <div id="DriverNameBySearchContainer" hidden>
+                                <div><label for="proName">Driver Name</label></div>
+                                <input type="text" class="form-control" id="ALseDriverName" placeholder="Driver Name" disabled>
+                            </div>
+                            </div>
+                
+                            <div class="col-4">
+                            <div><label for="proName">ID</label></div>
+                            <input type="text" class="form-control" id="ALdriverId" placeholder="ID" disabled>
+                            </div>
+                            <div class="col-4">
+                            <div><label for="proName">Plate Number</label></div>
+                            <input type="text" class="form-control" id="ALplateNumber" placeholder="Plate Number" disabled>
+                            </div>
+                        </div>
+                        <div class="form-group row-3 mt-3 mb-5">
+                            <button type="button" class="btn btn-primary" id="ALcom">Commit</button>
+                            <button type="button" class="btn btn-danger ml-3" id="ALcan2">Cancel</button>
+                        </div>
+                    </div>
+                    </div>
+                    <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
+                      <div class="conteaner border">
+                        <div id="CCconSearch">
+                          <div class="col-8">
+                            <div class="input-group mt-4 ">
+                              <input type="text" class="form-control" placeholder="Search by Driver ID" aria-label="Recipient's username" aria-describedby="button-addon10" id="CCdid">
+                              <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="button" id="CCsearchB"><i class="fa fa-search" aria-hidden="true"></i>Search</button>
+                              </div>
+                            </div>
+                            <small class="text-muted">Make sure you dont change the search input</small>
+                          </div>
+                        </div>
+                        <div class="m-3">
+                          <table class="table">
+                            <thead>
+                              <tr>
+                                <th scope="col">#ID</th>
+                                <th scope="col">Product Name</th>
+                                <th scope="col">Prodcution Date</th>
+                                <th scope="col">Experation Date</th>
+                                <th scope="col">Number of ceses</th>
+                              </tr>
+                            </thead>
+                            <tbody id="CCitemList">
+                            </tbody>
+                          </table>
+                          <div class="alert alert-success" role="alert" hidden id="cashal">
+                            A simple success alert—check it out!
+                          </div>
+                          
+                        </div>
+                        <div class="form-group row-3 mt-3 mb-5 ml-3">
+                          <button type="button" class="btn btn-primary" id="CCgenerate">Generate</button>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">
+
+                      <div class="row search-con" >
+                        <div class="col-6" id="searchCon" hidden>
+                          <div class="input-group mb-3 mt-4">
+                            <input type="text" class="form-control" placeholder="ID" aria-label="Recipient's username" aria-describedby="button-addon2" id="Lisearchinput">
+                            <div class="input-group-append">
+                              <button class="btn btn-outline-secondary" type="button" id="LIsearchBu"><i class="fa fa-search" aria-hidden="true"></i>Search</button>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-3">
+                          <div>Select</div>
+                          <select class="form-control col" id="Select">
+                            <option>Inventory</option>
+                            <option>Deliveryes</option>
+                            <option>Driver</option>
+                          </select>
+                        </div>
+                      </div>
+                      <table class="table table-striped mt-4" id="table" class="test">
+                      </table>
+                    </div>
+                    <div class="tab-pane fade" id="v-pills-req" role="tabpanel" aria-labelledby="v-pills-settings-tab">
+                      <div class="row">
+                        <div class="col-3">
+                          <label for="Porduct Name">Product Name</label>
+                          <div class="input-group">
+                            <input type="text" name="" id="productName" class="form-control" placeholder="Product Name">
+                          </div>
+                          <ul id="autocomplete-list-req" hidden></ul>
+                          <label for="Number of cases">Number of cases</label>
+                          <div class="input-group">
+                            <input type="number" name="" id="numberOfCases" class="form-control" placeholder="Number fo cases">
+                          </div>
+                          
+                          <div class="form-group row-3 mt-3 mb-5">
+                            <button type="button" class="btn btn-primary" id="reqAdd">Add</button>
+                          </div>
+                          
+                        </div>
+                        <div class="col">
+                          <div class="" id="reqcon">
+                            <table class="table table-striped reqTable" id="reqTable">
+                              <thead>
+                                <tr>
+                                  <th scope="col">Product Name</th>
+                                  <th scope="col">Number of cases</th>
+                                  <th scope="col">#####</th>
+                                </tr>
+                              </thead>
+                              <tbody id="tbody">
+                                
+                              </tbody>
+                            </table>
+                          </div>
+                          <div class="form-group row-3 mt-3 mb-5">
+                            <button type="button" class="btn btn-primary" id="reqSend">Send</button>
+                            <button type="button" class="btn btn-danger ml-3" id="reqCancel">Cancel</button>
+                          </div>
+                        </div>
+                      
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
